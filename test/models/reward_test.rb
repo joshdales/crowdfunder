@@ -49,6 +49,18 @@ class RewardTest < ActiveSupport::TestCase
     assert reward.invalid?, 'Reward should have a dollar_amount that is greater than 0.'
   end
 
+  test 'reward is invalid with negative dollar_amount' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    reward = new_reward
+    reward.project = project
+    reward.dollar_amount = -100
+    reward.save
+    assert reward.invalid?, 'Reward should have a dollar_amount that is positive.'
+  end
 
   def new_project
     Project.new(
