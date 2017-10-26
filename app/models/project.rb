@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   belongs_to :user # project owner
 
   validates :user_id, :title, :description, :goal, :start_date, :end_date, presence: true
+  validates :goal, numericality: {greater_than: 0}
   validate :project_start_not_in_past
   validate :project_end_date_after_start
 
@@ -19,5 +20,4 @@ class Project < ActiveRecord::Base
       errors.add(:end_date, "End date has to be after the start date")
     end
   end
-
 end
