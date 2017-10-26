@@ -24,6 +24,17 @@ class UpdateTest < ActiveSupport::TestCase
     assert update.invalid?, 'Update should have a project'
   end
 
+  test "Update must have a valid title" do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    project_update = ProjectUpdate.new(description: "Lowenthal")
+    project_update.save
+    assert project_update.invalid?, 'Update should have a title'
+  end
+
 
   def new_project
     Project.new(
