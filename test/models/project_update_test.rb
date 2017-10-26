@@ -38,7 +38,7 @@ class UpdateTest < ActiveSupport::TestCase
   end
 
   def new_update
-    Update.new(
+    ProjectUpdate.new(
       title: "It's all going well!",
       description: "Lowenthal"
     )
