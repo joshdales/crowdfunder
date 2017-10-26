@@ -23,6 +23,20 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, 'Project should not save without owner.'
   end
 
+  test 'project start date is not in the past' do
+    project = Project.new(
+      title: 'Cooler boardgame',
+      description: 'trade cool',
+      start_date: Date.today - 1.month,
+      end_date: Date.today + 1.month,
+      goal: 20000
+    )
+    # Act
+    project.save
+    #assert
+    assert project.invalid?, 'Project start date must not be in the past'
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
