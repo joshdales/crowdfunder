@@ -30,7 +30,18 @@ class UpdateTest < ActiveSupport::TestCase
     project = new_project
     project.user = owner
     project.save
-    project_update = ProjectUpdate.new(description: "Lowenthal")
+    project_update = ProjectUpdate.new(description: "It's all going well!")
+    project_update.save
+    assert project_update.invalid?, 'Update should have a title'
+  end
+
+  test "Update must have a valid description" do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    project_update = ProjectUpdate.new(title: "Lowenthal")
     project_update.save
     assert project_update.invalid?, 'Update should have a title'
   end
@@ -58,8 +69,8 @@ class UpdateTest < ActiveSupport::TestCase
 
   def new_update
     ProjectUpdate.new(
-      title: "It's all going well!",
-      description: "Lowenthal"
+      title: "Lowenthal",
+      description: "It's all going well!"
     )
   end
 end
