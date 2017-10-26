@@ -48,6 +48,7 @@ class ProjectTest < ActiveSupport::TestCase
 
     project.save
     assert project.invalid?, 'Project end date must be later than end date'
+  end
 
   test 'project is invalid with goal = 0' do
     owner = new_user
@@ -89,5 +90,4 @@ class ProjectTest < ActiveSupport::TestCase
       password_confirmation: 'passpass'
     )
   end
-
 end

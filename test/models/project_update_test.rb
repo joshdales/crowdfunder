@@ -16,6 +16,14 @@ class UpdateTest < ActiveSupport::TestCase
     assert update.persisted?, 'Update should save'
   end
 
+  test "Update must be associated to a valid project" do
+    owner = new_user
+    owner.save
+    update = new_update
+    update.save
+    assert update.invalid?, 'Update should have a project'
+  end
+
 
   def new_project
     Project.new(
