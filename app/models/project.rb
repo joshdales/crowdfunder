@@ -16,8 +16,10 @@ class Project < ActiveRecord::Base
   end
 
   def project_end_date_after_start
-    if end_date < start_date || end_date == start_date
-      errors.add(:end_date, "End date has to be after the start date")
+    if start_date.present? && end_date.present?
+      if end_date < start_date || end_date == start_date
+        errors.add(:end_date, "End date has to be after the start date")
+      end
     end
   end
 end
