@@ -1,6 +1,7 @@
 class PledgesController < ApplicationController
   before_action :require_login
-
+  before_action :pledge_user_is_not_owner
+  
   def create
     @project = Project.find(params[:project_id])
 
@@ -15,5 +16,5 @@ class PledgesController < ApplicationController
       render 'projects/show'
     end
   end
-  
+
 end
