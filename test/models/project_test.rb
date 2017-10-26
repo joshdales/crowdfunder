@@ -33,6 +33,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, 'Project should have a goal that is greater than 0.'
   end
 
+  test 'project is invalid with goal < 0' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.goal = -100
+    project.save
+    assert project.invalid?, 'Project should have a goal that is positive.'
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
