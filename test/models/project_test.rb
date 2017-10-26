@@ -37,6 +37,19 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, 'Project start date must not be in the past'
   end
 
+  test 'project end date must be later than start date' do
+    project = Project.new(
+      title: 'Cooler boardgame',
+      description: 'trade cool',
+      start_date: Date.today,
+      end_date: Date.today,
+      goal: 20000
+    )
+
+    project.save
+    assert project.invalid?, 'Project end date must be later than end date'
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
