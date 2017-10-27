@@ -16,10 +16,7 @@
   <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
 <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
 
-<%= form_for [@project, Pledge.new] do |f| %>
-  <%= f.number_field :dollar_amount, value: dollars_2dp(@project.rewards.minimum(:dollar_amount)), step: 0.01 %>
-  <%= f.submit "Pledge" %>
-<% end %>
+<%= render '/pledges/form', pledge: @pledge %>
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
