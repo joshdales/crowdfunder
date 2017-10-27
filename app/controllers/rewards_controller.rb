@@ -19,7 +19,7 @@ class RewardsController < ApplicationController
     end
   end
 
-  def update
+  def claim
     @reward = Reward.find(params[:id])
     @reward.increment(:claimed)
     if @reward.save
