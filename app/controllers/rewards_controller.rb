@@ -1,17 +1,16 @@
 class RewardsController < ApplicationController
   before_action :load_project
+  before_action :load_new_reward, only: %i(new create)
   before_action :ensure_login
+  before_action :ensure_ownership, only: %i(new create)
 
   def new
-    @reward = @project.rewards.build
-    ensure_ownership
+
   end
 
   def create
-    @reward = @project.rewards.build
     @reward.dollar_amount = params[:reward][:dollar_amount]
-    @reward.description = params[:reward][:description]
-
+    @reward.description = params[:reward][:description
     if @reward.save
       redirect_to project_url(@project), notice: 'Reward created'
     else
@@ -32,6 +31,10 @@ class RewardsController < ApplicationController
 
   def load_project
     @project = Project.find(params[:project_id])
+  end
+
+  def load_new_reward
+    @reward = @project.rewards.build
   end
 
   def ensure_login
