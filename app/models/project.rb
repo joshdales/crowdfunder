@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   validate :project_start_not_in_past
   validate :project_end_date_after_start
 
+
   def project_start_not_in_past
     if start_date.present? && start_date < Date.today
       errors.add(:start_date, "can't be in the past")
