@@ -75,8 +75,9 @@ class ProjectTest < ActiveSupport::TestCase
     owner.save
     project = new_project
     project.user = owner
-    result = Project.search(project)
-    expected = project
+    project.save
+    expected = [project]
+    result = Project.search(project.title)
     assert_equal expected, result
   end
 
