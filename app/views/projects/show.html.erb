@@ -30,7 +30,7 @@
 
 
 <% unless current_user == @project.user %>
-  <% if current_user.pledges.where(project_id: @project.id).empty? %>
+  <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
   <h2>Enter an amount to pledge below!</h2>
   <% else %>
   <h2>Hello, <%= current_user.first_name %>!</h2>
