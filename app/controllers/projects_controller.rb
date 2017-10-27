@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
    end
 
    def search
-     
+     @projects = Project.search(params[:search])
    end
 
 end

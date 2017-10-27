@@ -18,8 +18,8 @@
       <nav class="site-nav">
         <%= link_to "Home", root_url %>
 
-        <%= form_tag("/seach", method: "get") do %>
-          <%= label_tag(:search, params[:search], placeholder: "Search for a project") %>
+        <%= form_tag(search_path, method: "get") do %>
+          <%= label_tag(:search, "Search", placeholder: "Search for a project") %>
           <%= text_field_tag(:search) %>
           <%= submit_tag("Search") %>
         <% end %>
