@@ -19,5 +19,6 @@ class UsersController < ApplicationController
   end
 
   def show
+    @backed_projects = current_user.pledged_projects
   end
 end
