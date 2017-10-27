@@ -1,11 +1,14 @@
-<h1><%= @project.title %></h1>
-<% if @project.user == current_user %>
-<%= link_to "Add Update", new_project_project_update_path(@project)%>
-<% end %>
-
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
+<h1><%= @project.title %></h1>
+<h2>Updates</h2>
+
+
+<% if @project.user == current_user %>
+  <%= link_to "Add Update", new_project_project_update_path(@project)%>
+<% end %>
+
 <ul>
   <% @updates.each do |update| %>
     <li><%= update.title %><br />
@@ -60,3 +63,12 @@
 <% end %>
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
+
+<% if @project.user == current_user %>
+  <h2>Who pledged so far:</h2>
+  <ul>
+    <% (@project.pledges.map {|p| p.user}).each do |user| %>
+    <li><%= user.first_name %> <%= user.last_name %></li>
+    <% end %>
+  </ul>
+<% end %>
