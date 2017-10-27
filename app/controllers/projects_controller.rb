@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @updates = @project.project_updates.all.reverse
   end
 
   def new
