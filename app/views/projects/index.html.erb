@@ -1,6 +1,18 @@
-<p><%= Project.all.count %> projects have been started</p>
-<p><%= @successful_projects.count %> projects have been funded</p>
-<p>$<%= @successful_projects.map {|project| project.pledges.map{|p|p.dollar_amount}.sum}.sum %> have been pledged towards successful projects</p>
+<p><%= Project.all.count %>
+  <% if Project.all.count == 1 %>
+  project has
+  <% else %>
+  projects have
+  <% end %>
+  been started</p>
+<p><%= @successful_projects.count %>
+  <% if @successful_projects.count == 1 %>
+  project has
+  <% else %>
+  projects have
+  <% end %>
+  been funded</p>
+<p><%= project_pledges_sum(@successful_projects) %> have been pledged towards successful projects</p>
 
 
 
