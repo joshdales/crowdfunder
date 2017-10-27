@@ -3,7 +3,8 @@ class RewardsController < ApplicationController
   before_action :ensure_login
 
   def new
-    @reward = Reward.new
+    @reward = @project.rewards.build
+    ensure_ownership
   end
 
   def create
