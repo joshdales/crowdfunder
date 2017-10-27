@@ -1,5 +1,8 @@
 class ProjectUpdatesController < ApplicationController
+  before_action :require_login, except: [:show]
+
   def new
+
   end
 
   def show
