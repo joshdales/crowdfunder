@@ -6,6 +6,15 @@
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
+<ul>
+  <% @updates.each do |update| %>
+    <li><%= update.title %><br />
+      <%= update.description %><br />
+      Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
+      <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+    </li>
+  <% end %>
+</ul>
 
 <p><%= @project.description %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
@@ -16,10 +25,7 @@
   <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
 <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
 
-<%= form_for [@project, Pledge.new] do |f| %>
-  <%= f.number_field :dollar_amount, value: dollars_2dp(@project.rewards.minimum(:dollar_amount)), step: 0.01 %>
-  <%= f.submit "Pledge" %>
-<% end %>
+<%= render '/pledges/form', pledge: @pledge %>
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
