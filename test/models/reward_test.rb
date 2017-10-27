@@ -57,7 +57,7 @@ class RewardTest < ActiveSupport::TestCase
     project.save
     reward = new_reward
     reward.project = project
-    reward.dollar_amount = -100
+    reward.dollar_amount = -1
     reward.save
     assert reward.invalid?, 'Reward should have a dollar_amount that is positive.'
   end
