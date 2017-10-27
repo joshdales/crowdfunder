@@ -12,8 +12,8 @@ class ProjectUpdatesController < ApplicationController
   end
 
   def edit
-    @update = ProjectUpdate.find(params[:project_update_id])
     @project = Project.find(params[:project_id])
+    @update = @project.project_updates.find(params[:id])
   end
 
   def create
@@ -31,8 +31,27 @@ class ProjectUpdatesController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project_id])
+    @update = @project.project_updates.find(params[:id])
+
+    if @update.update_attributes(update_params)
+      redirect_to project_path(params[:project_id])
+    else
+      flash[:notice] = "All fields must be entered."
+      render :edit
+    end
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
+    @update = @project.project_updates.find(params[:id])
+    @update.delete
+    redirect_to project_path(params[:project_id])
+    flash[:notice] = "Update has been deleted."
+  end
+
+  private
+  def update_params
+    params.require(:project_update).permit(:title, :description)
   end
 end
