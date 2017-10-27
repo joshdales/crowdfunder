@@ -10,7 +10,8 @@ class RewardsController < ApplicationController
 
   def create
     @reward.dollar_amount = params[:reward][:dollar_amount]
-    @reward.description = params[:reward][:description
+    @reward.description = params[:reward][:description]
+    @reward.limit = params[:reward][:limit]
     if @reward.save
       redirect_to project_url(@project), notice: 'Reward created'
     else
