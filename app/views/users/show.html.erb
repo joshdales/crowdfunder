@@ -1,1 +1,5 @@
 <h1>Hi <%= current_user.first_name %></h1>
+
+<% @backed_projects.each do |backed_project| %>
+<h2><%= backed_project.title %></h2>
+<% end %>
