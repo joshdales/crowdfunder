@@ -19,6 +19,7 @@
           <%= link_to "Home", root_url %>
         <% if current_user %>
           <%= link_to "Logout", :logout, method: :delete %>
+          <%= link_to "Your Profile", user_path(current_user) %>
         <% else %>
           <%= link_to "Register", new_user_path %> |
           <%= link_to "Login", :login %>
