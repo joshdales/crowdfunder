@@ -19,6 +19,17 @@ class RewardsController < ApplicationController
     end
   end
 
+  def update
+    @reward = Reward.find(params[:id])
+    @reward.increment(:claimed)
+    if @reward.save
+      flash[:alert] = "1 #{ @reward.description } has been claimed!"
+    else
+      flash[:alert] = "You are not eligible to claim this reward!"
+    end
+    redirect_to project_url(@project)
+  end
+
   def destroy
     @reward = Reward.find(params[:id])
     if ensure_ownership

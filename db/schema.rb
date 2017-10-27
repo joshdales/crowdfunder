@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20171027043721) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "limit"
-    t.integer "claimed"
+    t.integer "claimed", default: 0
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

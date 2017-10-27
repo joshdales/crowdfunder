@@ -23,10 +23,16 @@
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
-  <p><%= number_to_currency(reward.dollar_amount) %></p>
+  <p>Pledge <%= number_to_currency(reward.dollar_amount) %> or more</p>
   <p><%= reward.description %></p>
+  <%= form_tag(project_reward_path(@project, reward), method: "patch") do %>
+    <%= submit_tag("Claim this Reward") %>
+  <% end %>
+  <p>Claimed: <%= reward.claimed %>
   <% if reward.limit %>
-    <p>Only <%= reward.limit %> available in total</p>
+    | Total available: <%= reward.limit %></p>
+  <% else %>
+    <p>No limits have been set for this reward.</p>
   <% end %>
 
   <p>
@@ -34,6 +40,7 @@
       <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
     </small>
   </p>
+  <p>-----------</p>
 <% end %>
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
