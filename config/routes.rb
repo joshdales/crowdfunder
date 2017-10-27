@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   delete 'logout' => 'user_sessions#destroy', :as => :logout
 
+  get 'search' =>'projects#seach', :as => :search
+
   resources :projects, only: [:index, :new, :create, :show] do
     resources :project_updates, except: [:index]
     resources :pledges, only: [:create]
