@@ -5,6 +5,7 @@ class Pledge < ApplicationRecord
 
 
   validates :dollar_amount, presence: true
+  validates :dollar_amount, numericality: { greater_than: 0 }
   validates :user, presence: true
   validate :pledge_user_is_not_owner
 
@@ -13,4 +14,7 @@ class Pledge < ApplicationRecord
       errors.add(:user, "You cannot back your own project")
     end
   end
+
+
+
 end

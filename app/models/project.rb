@@ -12,14 +12,14 @@ class Project < ActiveRecord::Base
 
   def project_start_not_in_past
     if start_date.present? && start_date < Date.today
-      errors.add(:start_date, "Start date can't be in the past")
+      errors.add(:start_date, "can't be in the past")
     end
   end
 
   def project_end_date_after_start
     if start_date.present? && end_date.present?
       if end_date < start_date || end_date == start_date
-        errors.add(:end_date, "End date has to be after the start date")
+        errors.add(:end_date, "has to be after the start date")
       end
     end
   end
