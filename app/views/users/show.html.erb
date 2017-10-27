@@ -1,10 +1,17 @@
 <h1>Hi <%= current_user.first_name %></h1>
 
-<% @backed_projects.each do |backed_project| %>
-<h2><%= backed_project.title %></h2>
-<% current_user.pledges.where(project: backed_project).each do |pledge| %>
-<ul>
-  <li><%= number_to_currency(pledge.dollar_amount) %></li>
-</ul>
+
+<h2>My Projects</h2>
+<% current_user.projects.each do |project| %>
+  <h3><%= project.title %></h3>
 <% end %>
+
+<h2>Backed Projects</h2>
+<% @backed_projects.each do |backed_project| %>
+  <h3><%= backed_project.title %></h3>
+  <% current_user.pledges.where(project: backed_project).each do |pledge| %>
+    <ul>
+      <li><%= number_to_currency(pledge.dollar_amount) %></li>
+    </ul>
+  <% end %>
 <% end %>
