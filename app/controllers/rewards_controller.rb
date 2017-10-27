@@ -21,8 +21,23 @@ class RewardsController < ApplicationController
 
   def claim
     @reward = Reward.find(params[:id])
-    @reward.increment(:claimed)
-    if @reward.save
+
+    @pledge = @reward.pledges.build
+    @pledge.user = current_user
+    @pledge.dollar_amount = @reward.dollar_amount
+    @pledge.project = @reward.project
+
+    if @reward.limit != nil
+      if @reward.claimed < @reward.limit
+        add_one_to_claimed_and_save
+        if @pledge.save
+          flash[:alert] = "1 #{ @reward.description } has been claimed!"
+        end
+      else
+        flash[:alert] = "Sorry, the reward limit has been reached!"
+      end
+    elsif @pledge.save
+      add_one_to_claimed_and_save
       flash[:alert] = "1 #{ @reward.description } has been claimed!"
     else
       flash[:alert] = "You are not eligible to claim this reward!"
@@ -62,4 +77,10 @@ class RewardsController < ApplicationController
       redirect_to project_url(@project)
     end
   end
+
+  def add_one_to_claimed_and_save
+    @reward.increment(:claimed)
+    @reward.save
+  end
+
 end
