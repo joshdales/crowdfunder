@@ -58,13 +58,17 @@
 
   <p>
     <small>
+      <% if current_user == @project.user %>
       <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+      <% end %>
     </small>
   </p>
   <p>-----------</p>
 <% end %>
 
+<% if current_user == @project.user %>
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
+<% end %>
 
 <% if @project.user == current_user %>
   <h2>Who pledged so far:</h2>
