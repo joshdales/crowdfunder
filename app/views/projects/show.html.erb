@@ -1,11 +1,14 @@
-<h1><%= @project.title %></h1>
-<% if @project.user == current_user %>
-<%= link_to "Add Update", new_project_project_update_path(@project)%>
-<% end %>
-
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
+<h1><%= @project.title %></h1>
+<h2>Updates</h2>
+
+
+<% if @project.user == current_user %>
+  <%= link_to "Add Update", new_project_project_update_path(@project)%>
+<% end %>
+
 <ul>
   <% @updates.each do |update| %>
     <li><%= update.title %><br />
@@ -25,7 +28,17 @@
   <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
 <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
 
-<%= render '/pledges/form', pledge: @pledge %>
+
+<% unless current_user == @project.user %>
+  <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
+  <h2>Enter an amount to pledge below!</h2>
+  <% else %>
+  <h2>Hello, <%= current_user.first_name %>!</h2>
+  <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
+  <% end %>
+  <%= render '/pledges/form', pledge: @pledge %>
+<% end %>
+
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
@@ -50,3 +63,12 @@
 <% end %>
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
+
+<% if @project.user == current_user %>
+  <h2>Who pledged so far:</h2>
+  <ul>
+    <% (@project.pledges.map {|p| p.user}).each do |user| %>
+    <li><%= user.first_name %> <%= user.last_name %></li>
+    <% end %>
+  </ul>
+<% end %>
