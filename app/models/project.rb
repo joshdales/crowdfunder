@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   has_many :project_updates
 
   validates :user_id, :title, :description, :goal, :start_date, :end_date, presence: true
-  validates :goal, numericality: {greater_than: 0}
+  validates :goal, numericality: { greater_than: 0 }
   validate :project_start_not_in_past
   validate :project_end_date_after_start
 
@@ -20,10 +20,14 @@ class Project < ActiveRecord::Base
   def project_end_date_after_start
     if start_date.present? && end_date.present?
       if end_date < start_date || end_date == start_date
-        errors.add(:end_date, "has to be after the start date")
+        errors.add(:end_date, 'has to be after the start date')
       end
     end
   end
 
-  
+
+  def self.search(search)
+    where('title ILIKE ?', "%#{search}%")
+  end
+
 end

@@ -68,7 +68,39 @@ class ProjectTest < ActiveSupport::TestCase
     project.goal = -1
     project.save
     assert project.invalid?, 'Project should have a goal that is positive.'
+  end
 
+  test 'Search for a project that exists' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    expected = [project]
+    result = Project.search(project.title)
+    assert_equal expected, result
+  end
+
+  test 'empty_search_returns_nothing' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    expected = []
+    result = Project.search("")
+    assert_equal expected, result
+  end
+
+  test 'search_for_a_project_that_doesnt_exist_returns_nothing' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    expected = []
+    result = Project.search("sdifgjo")
+    assert_equal expected, result
   end
 
   def new_project
