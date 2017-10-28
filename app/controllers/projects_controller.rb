@@ -18,7 +18,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @updates = @project.project_updates.all.reverse
+    @updates = @project.project_updates.where("created_at < ?", @project.end_date)
+    @pledger_updates = @project.project_updates.all.reverse
   end
 
   def new
