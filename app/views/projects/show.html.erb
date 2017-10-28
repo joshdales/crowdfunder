@@ -28,7 +28,7 @@
 <%= link_to "Add Update", new_project_project_update_path(@project)%>
 <% end %>
 
-<% if current_user.pledged_projects == @project %>
+<% if current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
   <ul>
     <% @pledger_updates.each do |update| %>
       <li><%= update.title %><br />
