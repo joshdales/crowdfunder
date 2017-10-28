@@ -1,7 +1,13 @@
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
+
 <h1><%= @project.title %></h1>
+<% if @project.tags.present? %>
+  <% @project.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
+<% end %>
 <h2>Updates</h2>
 
 

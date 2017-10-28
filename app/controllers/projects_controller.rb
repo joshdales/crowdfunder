@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
       end
     end
 
-
+    # @tags = Tags.all
 
   end
 
