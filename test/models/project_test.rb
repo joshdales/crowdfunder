@@ -92,6 +92,17 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal expected, result
   end
 
+  test 'search_for_a_project_that_doesnt_exist_returns_nothing' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    expected = []
+    result = Project.search("sdifgjo")
+    assert_equal expected, result
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',

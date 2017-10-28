@@ -49,8 +49,8 @@ class ProjectsController < ApplicationController
     end
    end
 
-   def search
+  def search
      @projects = Project.search(params[:search])
-   end
+  end
 
 end
