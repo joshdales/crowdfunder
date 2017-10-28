@@ -14,7 +14,9 @@
     <li><%= update.title %><br />
       <%= update.description %><br />
       Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
-      <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% if current_user == @project.user %>
+        <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
     </li>
   <% end %>
 </ul>
