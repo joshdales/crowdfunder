@@ -81,6 +81,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal expected, result
   end
 
+  test 'empty_search_returns_nothing' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    expected = []
+    result = Project.search("")
+    assert_equal expected, result
+  end
 
   def new_project
     Project.new(
