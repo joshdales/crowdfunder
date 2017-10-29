@@ -57,7 +57,7 @@
 
 
 <h2>Rewards</h2>
-<% @project.rewards.each do |reward| %>
+<% @rewards.each do |reward| %>
   <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
   <p><%= reward.description %></p>
   <%= form_tag(claim_project_reward_path(@project, reward), method: "patch") do %>
