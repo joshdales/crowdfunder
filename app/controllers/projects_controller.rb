@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
     )
     @project.image = params[:project][:image]
     @project.user = current_user
+    @project.tag_ids = params[:project][:tag_ids]
 
     if @project.save
       redirect_to projects_url
