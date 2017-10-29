@@ -5,7 +5,7 @@
 <h1><%= @project.title %></h1>
 <% if @project.tags.present? %>
   <% @project.tags.each do |tag| %>
-    <%= tag.name %>
+    <p><%= tag.name %></p> 
   <% end %>
 <% end %>
 <h2>Updates</h2>

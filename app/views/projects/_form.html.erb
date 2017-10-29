@@ -6,7 +6,7 @@
       <% end %>
     </ul>
   <% end %>
-  
+
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -35,6 +35,10 @@
   <div>
     <%= f.label :end_date %>
     <%= f.datetime_select :end_date %>
+  </div>
+
+  <div class="">
+    <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
   </div>
 
   <%= f.submit %>
