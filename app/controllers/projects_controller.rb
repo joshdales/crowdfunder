@@ -6,14 +6,12 @@ class ProjectsController < ApplicationController
     @projects = @projects.order(:end_date)
 
     @successful_projects = []
+
     @projects.each do |project|
       if (project.pledges.map{|p|p.dollar_amount}.sum) >= project.goal
         @successful_projects << project
       end
     end
-
-
-
   end
 
   def show
@@ -59,7 +57,6 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
-   end
 
   def search
      @projects = Project.search(params[:search])
