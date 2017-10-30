@@ -72,7 +72,7 @@
         <li>
           <p><%= project_comment.user.first_name %> said:</p>
           <p><%= project_comment.comment %></p>
-          <p>Created at <%= project_comment.created_at %></p>
+          <p>Created at <%= dateformat(project_comment.created_at) %></p>
         </li>
       <% end %>
     <% end %>
@@ -81,7 +81,7 @@
   <p>No comments have been left yet.</p>
 <% end %>
 
-<% if current_user && current_user.pledged_projects.includes(@project) %>
+<% if current_user && current_user.pledged_projects.include?(@project) %>
   <h3>Add Comment</h3>
   <%= form_for([@project, @project_comment]) do |f| %>
     <div>
@@ -89,7 +89,7 @@
       <%= f.text_area :comment %>
     </div>
     <div>
-      <%= f.submit "Add Comment" %>
+      <%= f.submit "Submit Comment" %>
     </div>
   <% end %>
 
