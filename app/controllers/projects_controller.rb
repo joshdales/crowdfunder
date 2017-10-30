@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @rewards = @project.rewards.sort_by { |r| r.dollar_amount}
     @updates = @project.project_updates.where("created_at < ?", @project.end_date)
-    @pledger_updates = @project.project_updates.all.reverse
+    @pledger_updates = @project.project_updates.where("created_at > ?", @project.end_date).reverse
   end
 
   def new
