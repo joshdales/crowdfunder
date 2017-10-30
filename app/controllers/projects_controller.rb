@@ -11,9 +11,6 @@ class ProjectsController < ApplicationController
         @successful_projects << project
       end
     end
-
-
-
   end
 
   def show
@@ -26,10 +23,12 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.rewards.build
+    @tags = Tag.all
   end
 
   def create
     @project = Project.new
+    @tags = Tag.all
     @project.title = params[:project][:title]
     @project.description = params[:project][:description]
     @project.goal = params[:project][:goal]
@@ -53,6 +52,7 @@ class ProjectsController < ApplicationController
     )
     @project.image = params[:project][:image]
     @project.user = current_user
+    @project.tag_ids = params[:project][:tag_ids]
 
     if @project.save
       redirect_to projects_url
