@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         patch :claim
       end
     end
+    resources :project_comments, only: [:create, :destroy]
   end
   resources :users, only: [:new, :create, :show]
   resources :user_sessions, only: [:create]
