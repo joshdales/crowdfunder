@@ -55,3 +55,9 @@ end
     dollar_amount: project.rewards.sample.dollar_amount + rand(10)
   )
 end
+
+Tag.create!(name: "Art")
+Tag.create!(name: "Design")
+Tag.create!(name: "Technology")
+Tag.create!(name: "Film")
+Tag.create!(name: "Science")

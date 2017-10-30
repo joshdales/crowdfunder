@@ -1,8 +1,22 @@
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
+
 <h1><%= @project.title %></h1>
-<h4>By <%= @project.user.first_name %> <%= @project.user.last_name %></h4>
+
+<h4>By
+  <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+
+<% if @project.tags.present? %>
+  <% @project.tags.each do |tag| %>
+    <p><%= tag.name %></p>
+  <% end %>
+<% end %>
+
+
+<% if @project.user == current_user %>
+  <%= link_to "Add Update", new_project_project_update_path(@project)%>
+<% end %>
 
 <p><%= @project.description %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
@@ -23,25 +37,12 @@
   <%= render '/pledges/form', pledge: @pledge %>
   <% end %>
 
-  <h2>Updates</h2>
+<h2>Updates</h2>
 
-<% if @project.user == current_user %>
-<%= link_to "Add Update", new_project_project_update_path(@project)%>
-<% end %>
+  <% if @project.user == current_user %>
+  <%= link_to "Add Update", new_project_project_update_path(@project)%>
+  <% end %>
 
-<% if current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
-  <ul>
-    <% @pledger_updates.each do |update| %>
-      <li><%= update.title %><br />
-        <%= update.description %><br />
-        Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
-        <% if current_user == @project.user %>
-        <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
   <ul>
     <% @updates.each do |update| %>
     <li><%= update.title %><br />
@@ -53,8 +54,20 @@
     </li>
     <% end %>
   </ul>
-<% end %>
 
+<% if current_user && current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
+  <ul>
+    <% @pledger_updates.each do |update| %>
+      <li><%= update.title %><br />
+        <%= update.description %><br />
+        Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
+        <% if current_user == @project.user %>
+        <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <h2>Rewards</h2>
 <% @rewards.each do |reward| %>
