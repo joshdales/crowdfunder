@@ -64,6 +64,38 @@
   </ul>
 <% end %>
 
+<h2>Comments</h2>
+<% if @project.project_comments.any? %>
+  <ul>
+    <% @project.project_comments.each do |project_comment| %>
+      <% if project_comment.persisted? %>
+        <li>
+          <p><%= project_comment.user.first_name %> said:</p>
+          <p><%= project_comment.comment %></p>
+          <p>Created at <%= project_comment.created_at %></p>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments have been left yet.</p>
+<% end %>
+
+<% if current_user && current_user.pledged_projects.includes(@project) %>
+  <h3>Add Comment</h3>
+  <%= form_for([@project, @project_comment]) do |f| %>
+    <div>
+      <%= f.label :comment %>:
+      <%= f.text_area :comment %>
+    </div>
+    <div>
+      <%= f.submit "Add Comment" %>
+    </div>
+  <% end %>
+
+<% end %>
+
+
 <h2>Rewards</h2>
 <% @rewards.each do |reward| %>
   <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
