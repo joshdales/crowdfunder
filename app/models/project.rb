@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   belongs_to :user # project owner
   has_many :project_updates
   has_and_belongs_to_many :tags
+  has_many :project_comments
   validates :user_id, :title, :description, :goal, :start_date, :end_date, presence: true
   validates :goal, numericality: { greater_than: 0 }
   validate :project_start_not_in_past
