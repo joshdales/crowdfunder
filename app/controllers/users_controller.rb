@@ -19,7 +19,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @backed_projects = current_user.pledged_projects.uniq
+    if current_user
+      @backed_projects = current_user.pledged_projects.uniq
+    else
+      redirect_to login_path
+    end
   end
 
   def owner
