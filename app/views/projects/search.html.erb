@@ -3,7 +3,7 @@
 <% if @projects == nil%>
 <p>Nothing matches your search</p>
 <% else %>
-  <% @projects.each do |project| %>
+  <% @projects.uniq.each do |project| %>
     <article class="project">
       <%= link_to project, class: 'project-link' do %>
         <h2 class="project-title"><%= project.title %></h2>
