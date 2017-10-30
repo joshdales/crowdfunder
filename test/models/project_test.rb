@@ -53,7 +53,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'project is invalid with goal = 0' do
     owner = new_user
     owner.save
-    project = new_project
+    project = build(:project)
     project.user = owner
     project.goal = 0
     project.save
@@ -63,7 +63,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'project is invalid with goal < 0' do
     owner = new_user
     owner.save
-    project = new_project
+    project = build(:project)
     project.user = owner
     project.goal = -1
     project.save
@@ -73,7 +73,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'Search for a project that exists' do
     owner = new_user
     owner.save
-    project = new_project
+    project = build(:project)
     project.user = owner
     project.save
     expected = [project]
@@ -84,7 +84,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'empty_search_returns_nothing' do
     owner = new_user
     owner.save
-    project = new_project
+    project = build(:project)
     project.user = owner
     project.save
     expected = []
@@ -95,7 +95,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'search_for_a_project_that_doesnt_exist_returns_nothing' do
     owner = new_user
     owner.save
-    project = new_project
+    project = build(:project)
     project.user = owner
     project.save
     expected = []
