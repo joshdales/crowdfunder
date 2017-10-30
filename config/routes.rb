@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resources :user_sessions, only: [:create]
 
+  get 'project/:project_id/owner/:id' => 'users#owner', :as => :project_owner
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

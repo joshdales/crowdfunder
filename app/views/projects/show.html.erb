@@ -4,6 +4,9 @@
 
 <h1><%= @project.title %></h1>
 
+<h4>By
+  <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+
 <% if @project.tags.present? %>
   <% @project.tags.each do |tag| %>
     <p><%= tag.name %></p> 
@@ -27,7 +30,6 @@
     </li>
   <% end %>
 </ul>
-
 
 <p><%= @project.description %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
