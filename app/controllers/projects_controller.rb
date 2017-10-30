@@ -60,9 +60,9 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
+  end
 
   def search
      @projects = Project.search(params[:search])
   end
-
 end
