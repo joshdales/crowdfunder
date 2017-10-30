@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'search' =>'projects#search', :as => :search
 
   resources :projects, only: [:index, :new, :create, :show] do
-    resources :owners, only: [:show]
     resources :project_updates, except: [:index]
     resources :pledges, only: [:create]
     resources :rewards, only: [:new, :create, :destroy, :update] do
@@ -18,6 +17,8 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:new, :create, :show]
   resources :user_sessions, only: [:create]
+
+  get 'project/:project_id/owner/:id' => 'users#owner', :as => :project_owner
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

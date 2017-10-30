@@ -21,4 +21,9 @@ class UsersController < ApplicationController
   def show
     @backed_projects = current_user.pledged_projects.uniq
   end
+
+  def owner
+    @owner = Project.find(params[:project_id]).user
+    @backed_projects = @owner.pledged_projects.uniq
+  end
 end
