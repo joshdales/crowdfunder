@@ -15,6 +15,10 @@ class ProjectCommentsController < ApplicationController
   end
 
   def destroy
-    #code
+    @project = Project.find(params[:project_id])
+    @project_comment = @project.project_comments.find(params[:id])
+    @project_comment.destroy
+    flash[:notice] = "Your comment has been successfully deleted!"
+    redirect_to project_url(@project)
   end
 end
