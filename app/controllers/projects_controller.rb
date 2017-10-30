@@ -63,6 +63,8 @@ class ProjectsController < ApplicationController
   end
 
   def search
-     @projects = Project.search(params[:search])
+    @search_projects = Project.search(params[:search]).to_a
+    @search_tags = Tag.search(params[:search]).projects.all.to_a
+    @projects = (@search_projects << @search_tags).flatten!
   end
 end
