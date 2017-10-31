@@ -60,11 +60,15 @@
     .tags {
       grid-column: 2 / 12;
       grid-row: 3;
+      p {
+      display: inline-block;
+    }
     }
   }
 
 
   .main-content {
+    margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(6, 6fr);
     grid-gap: 0.7rem;
