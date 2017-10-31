@@ -33,30 +33,17 @@
   <% end %>
 <hr>
 
-<section class="main-content"
-<section class="updates-and-comments">
-  <section class="project-updates">
-    <h2>Updates</h2>
+<section class="main-content">
+  <section class="updates-and-comments">
+    <section class="project-updates">
+      <h2>Updates</h2>
 
-      <% if @project.user == current_user %>
-      <%= link_to "Add Update", new_project_project_update_path(@project)%>
-      <% end %>
-
-      <ul>
-        <% @updates.each do |update| %>
-        <li><%= update.title %><br />
-          <%= update.description %><br />
-          Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
-          <% if current_user == @project.user %>
-          <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
-          <% end %>
-        </li>
+        <% if @project.user == current_user %>
+        <%= link_to "Add Update", new_project_project_update_path(@project)%>
         <% end %>
-      </ul>
 
-    <% if current_user && current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
-      <ul>
-        <% @pledger_updates.each do |update| %>
+        <ul>
+          <% @updates.each do |update| %>
           <li><%= update.title %><br />
             <%= update.description %><br />
             Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
@@ -64,77 +51,91 @@
             <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
           </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </section>
+          <% end %>
+        </ul>
 
-  <section class="project-comments"
-    <h2>Comments by Backers</h2>
-    <% if @project.project_comments.any? %>
-      <ul>
-        <% @project.project_comments.each do |project_comment| %>
-          <% if project_comment.persisted? %>
-            <li>
-              <p><%= project_comment.user.first_name %> said:</p>
-              <p><%= project_comment.comment %></p>
-              <p>Created at <%= dateformat(project_comment.created_at) %>
-              <% if current_user == project_comment.user %>
-                | <%= link_to("Delete", project_project_comment_path(@project, project_comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?"}) %>
+      <% if current_user && current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
+        <ul>
+          <% @pledger_updates.each do |update| %>
+            <li><%= update.title %><br />
+              <%= update.description %><br />
+              Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
+              <% if current_user == @project.user %>
+              <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
               <% end %>
-              </p>
             </li>
           <% end %>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No comments have been left yet.</p>
-    <% end %>
-
-    <% if current_user && current_user.pledged_projects.include?(@project) %>
-      <h3>Add Comment</h3>
-      <%= form_for([@project, @project_comment]) do |f| %>
-        <div>
-          <%= f.label :comment %>:
-          <%= f.text_area :comment %>
-        </div>
-        <div>
-          <%= f.submit "Submit Comment" %>
-        </div>
+        </ul>
       <% end %>
-    <% end %>
+    </section>
+
+    <section class="project-comments">
+      <h2>Comments by Backers</h2>
+      <% if @project.project_comments.any? %>
+        <ul>
+          <% @project.project_comments.each do |project_comment| %>
+            <% if project_comment.persisted? %>
+              <li>
+                <p><%= project_comment.user.first_name %> said:</p>
+                <p><%= project_comment.comment %></p>
+                <p>Created at <%= dateformat(project_comment.created_at) %>
+                <% if current_user == project_comment.user %>
+                  | <%= link_to("Delete", project_project_comment_path(@project, project_comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?"}) %>
+                <% end %>
+                </p>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No comments have been left yet.</p>
+      <% end %>
+
+      <% if current_user && current_user.pledged_projects.include?(@project) %>
+        <h3>Add Comment</h3>
+        <%= form_for([@project, @project_comment]) do |f| %>
+          <div>
+            <%= f.label :comment %>:
+            <%= f.text_area :comment %>
+          </div>
+          <div>
+            <%= f.submit "Submit Comment" %>
+          </div>
+        <% end %>
+      <% end %>
+    </section>
   </section>
 
-<section class="project-rewards">
-  <h2>Rewards</h2>
-  <% @rewards.each do |reward| %>
-    <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
-    <p><%= reward.description %></p>
-    <%= form_tag(claim_project_reward_path(@project, reward), method: "patch") do %>
-      <%= submit_tag("Pledge and Claim this Reward") %>
-    <% end %>
-    <p>Claimed: <%= reward.claimed %>
-    <% if reward.limit %>
-      | Total available: <%= reward.limit %></p>
-    <% else %>
-      | No limits have been set for this reward.</p>
-    <% end %>
-
-    <p>
-      <small>
-        <% if current_user == @project.user %>
-        <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+    <section class="project-rewards">
+      <h2>Rewards</h2>
+      <% @rewards.each do |reward| %>
+        <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
+        <p><%= reward.description %></p>
+        <%= form_tag(claim_project_reward_path(@project, reward), method: "patch") do %>
+          <%= submit_tag("Pledge and Claim this Reward") %>
         <% end %>
-      </small>
-    </p>
-    <p>-----------</p>
-  <% end %>
+        <p>Claimed: <%= reward.claimed %>
+        <% if reward.limit %>
+          | Total available: <%= reward.limit %></p>
+        <% else %>
+          | No limits have been set for this reward.</p>
+        <% end %>
 
-  <% if current_user == @project.user %>
-  <%= link_to "Add new reward", new_project_reward_path(@project) %>
-  <% end %>
-</section>
-</section>
+        <p>
+          <small>
+            <% if current_user == @project.user %>
+            <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+            <% end %>
+          </small>
+        </p>
+        <p>-----------</p>
+      <% end %>
+
+      <% if current_user == @project.user %>
+      <%= link_to "Add new reward", new_project_reward_path(@project) %>
+      <% end %>
+    </section>
+  </section>
 
 <% if @project.user == current_user %>
   <h2>Who pledged so far:</h2>
