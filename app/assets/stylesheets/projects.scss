@@ -26,3 +26,22 @@
 .project-days-left {
   font-size: 0.75em;
 }
+
+
+@media ( min-width: 1024px ) {
+  .main-content {
+    display: grid;
+    grid-template-columns: repeat(6, 6fr);
+    grid-gap: 0.7rem;
+    .project-and-updates {
+      grid-column: 0 / 5;
+    }
+
+    .project-rewards {
+      grid-column: 5 / 7;
+      height: 300px;
+      overflow: scroll;
+    }
+  }
+  
+}
