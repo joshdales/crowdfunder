@@ -24,16 +24,9 @@ class UpdateTest < ActiveSupport::TestCase
   end
 
   test "Update must have a valid description" do
-    project = create(:project)
-    project_update = ProjectUpdate.new(title: "Lowenthal")
+    project_update = build(:project_update, description: nil)
     project_update.save
     assert project_update.invalid?, 'Update should have a title'
   end
 
-  def new_update
-    ProjectUpdate.new(
-      title: "Lowenthal",
-      description: "It's all going well!"
-    )
-  end
 end
