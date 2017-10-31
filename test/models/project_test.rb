@@ -34,8 +34,7 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'project is invalid with goal < 0' do
-    project = build(:project, goal: -1)
-    project.save
+    project = create(:project, goal: -1)
     assert project.invalid?, 'Project should have a goal that is positive.'
   end
 
