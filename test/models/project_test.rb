@@ -34,12 +34,13 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'project is invalid with goal < 0' do
-    project = create(:project, goal: -1)
-    assert project.invalid?, 'Project should have a goal that is positive.'
+    project = build(:project, goal: -1)
+    project.save
+    assert project.invalid?, 'Project should have a goal that is greater than 0.'
   end
 
   test 'Search for a project that exists' do
-    project = create(:project)
+    project = build(:project)
     expected = [project]
     result = Project.search(project.title)
     assert_equal expected, result
