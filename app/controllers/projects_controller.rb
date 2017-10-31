@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
     @rewards = @project.rewards.sort_by { |r| r.dollar_amount}
     @updates = @project.project_updates.where("created_at < ?", @project.end_date)
     @pledger_updates = @project.project_updates.where("created_at > ?", @project.end_date).reverse
+    @project_comment = @project.project_comments.build
   end
 
   def new
@@ -63,6 +64,8 @@ class ProjectsController < ApplicationController
   end
 
   def search
-     @projects = Project.search(params[:search])
+    @search_projects = Project.search(params[:search]).to_a
+    @search_tags = Tag.search(params[:search]).projects.all.to_a
+    @projects = (@search_projects << @search_tags).flatten!
   end
 end
