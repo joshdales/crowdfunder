@@ -67,7 +67,6 @@
     display: grid;
     grid-template-columns: repeat(6, 6fr);
     grid-gap: 0.7rem;
-    height: 500px;
     .updates-and-comments {
       grid-column: 1 / 5;
       overflow: scroll;
