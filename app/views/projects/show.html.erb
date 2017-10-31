@@ -41,7 +41,6 @@
     <% end %>
   </section>
 </section>
-<hr>
 
 <section class="main-content">
   <section class="updates-and-comments">
@@ -122,6 +121,7 @@
     <section class="project-rewards">
       <h2>Rewards</h2>
       <% @rewards.each do |reward| %>
+      <div class="reward">
         <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
         <p><%= reward.description %></p>
         <%= form_tag(claim_project_reward_path(@project, reward), method: "patch") do %>
@@ -142,6 +142,7 @@
           </small>
         </p>
         <p>-----------</p>
+      </div>
       <% end %>
 
       <% if current_user == @project.user %>
