@@ -2,7 +2,8 @@
   <% if @project.image.present? %>
     <%= image_tag @project.image %>
   <% else %>
-    <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+  <div style="background-image: url(<%= ActionController::Base.helpers.asset_path("default.jpg") %>)"></div>
+  <%# image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
   <% end %>
 
   <h1><%= @project.title %></h1>
@@ -11,9 +12,12 @@
     <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
 
   <% if @project.tags.present? %>
+    <div class="tags">
+
     <% @project.tags.each do |tag| %>
       <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
     <% end %>
+  </div>
   <% end %>
 
   <p class="description"><%= @project.description %></p>
