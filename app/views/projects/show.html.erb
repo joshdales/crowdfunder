@@ -71,6 +71,9 @@
 
     <section class="project-comments">
       <h2>Comments by Backers</h2>
+      <% unless current_user %>
+        <p>Please log in to leave a comment</p>
+      <% end %>
       <% if @project.project_comments.any? %>
         <ul>
           <% @project.project_comments.each do |project_comment| %>
