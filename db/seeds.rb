@@ -27,7 +27,6 @@ end
     project.rewards.create!(
       description: Faker::Superhero.power,
       dollar_amount: rand(1..100),
-      limit: rand(10..50)
     )
   end
     3.times do
@@ -37,6 +36,7 @@ end
         project: project
       )
   end
+
 end
 
 20.times do
@@ -61,3 +61,13 @@ Tag.create!(name: "Design")
 Tag.create!(name: "Technology")
 Tag.create!(name: "Film")
 Tag.create!(name: "Science")
+
+Project.all.each do |project|
+  tags = Tag.pluck(:id)
+  rand(2..4).times do
+    tag = Tag.find(tags.sample)
+    unless project.tags.include? tag
+      project.tags << tag
+    end
+  end
+end
