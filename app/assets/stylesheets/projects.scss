@@ -29,6 +29,22 @@
 
 
 @media ( min-width: 1024px ) {
+  .project-header {
+    display: grid;
+    grid-template-columns: repeat(6, 6fr);
+    grid-template-rows: repeat(3, 3fr);
+    grid-area: 1 / 1 / 10 / 10;
+    h1 {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    h4 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+
   .main-content {
     display: grid;
     grid-template-columns: repeat(6, 6fr);
