@@ -40,21 +40,21 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'Search for a project that exists' do
-    project = build(:project)
+    project = create(:project)
     expected = [project]
     result = Project.search(project.title)
     assert_equal expected, result
   end
 
   test 'empty_search_returns_nothing' do
-    project = build(:project)
+    project = create(:project)
     expected = []
     result = Project.search("")
     assert_equal expected, result
   end
 
   test 'search_for_a_project_that_doesnt_exist_returns_nothing' do
-    project = build(:project)
+    project = create(:project)
     expected = []
     result = Project.search("sdifgjo")
     assert_equal expected, result

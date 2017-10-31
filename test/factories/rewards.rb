@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :rewards do
+  factory :reward do
     dollar_amount 99.00
     description 'A heartfelt thanks!'
   end
