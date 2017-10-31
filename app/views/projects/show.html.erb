@@ -3,7 +3,6 @@
     <%= image_tag @project.image %>
   <% else %>
   <div style="background-image: url(<%= ActionController::Base.helpers.asset_path("default.jpg") %>)"></div>
-  <%# image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
   <% end %>
 
   <h1><%= @project.title %></h1>
