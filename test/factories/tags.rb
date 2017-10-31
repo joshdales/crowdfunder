@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :tag do
-    name
+    name "Video Games"
   end
 end

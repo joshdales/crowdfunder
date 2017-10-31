@@ -10,12 +10,9 @@ class PledgeTest < ActiveSupport::TestCase
   end
 
   test 'owner cannot back own project' do
-    # Arrange
     project = create(:project)
-    # Act
     pledge = build(:pledge, project: project, user: project.user)
     pledge.save
-    # Assert
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
