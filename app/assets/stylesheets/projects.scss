@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.hero-image{
+  background-image: asset-url("crowdfunder_hero.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #ffffff;
+}
 .project {
   text-align: center;
   margin: 1rem 0;
