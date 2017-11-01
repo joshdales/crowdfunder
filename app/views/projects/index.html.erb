@@ -36,6 +36,7 @@
         <%= icon('clock-o') %>
         <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
         <p>Total Raised To Date: <%= number_to_currency(project.pledges.map{ |pledge| pledge.dollar_amount }.sum) %></p>
+        <p><%= number_with_precision(project.calculate_percentage, precision: 2)   %>% of Goal Raised</p>
         <% end %>
       </article>
       <% end %>
