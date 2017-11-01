@@ -13,14 +13,13 @@
       | No limits have been set for this reward.</p>
     <% end %>
 
+    <% if current_user == @project.user %>
     <p>
       <small>
-        <% if current_user == @project.user %>
         <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
-        <% end %>
       </small>
+      <% end %>
     </p>
-    <p>-----------</p>
   </div>
 <% end %>
 </section>
