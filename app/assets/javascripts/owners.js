@@ -1,36 +1,20 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-document.getElementById('my-projects').style.display = "grid";
-document.getElementById('projects').style.backgroundColor = "white";
-document.getElementById('projects').style.color = "black";
-
-document.getElementById('my-pledges').style.display = "none";
-document.getElementById('pledges').style.backgroundColor = "grey";
+document.getElementById('projects').classList.toggle('tab-change');
+document.getElementById('my-pledges').classList.toggle('content-change');
 
 function toggleState(tab, section) {
-  document.getElementById(tab).addEventListener('click', function() {
-
-    document.getElementById('my-pledges').style.display = "none";
-    document.getElementById('my-projects').style.display = "none";
-
-    document.getElementById('pledges').style.backgroundColor = "grey";
-    document.getElementById('projects').style.backgroundColor = "grey";
-
-    document.getElementById('pledges').style.color = "white";
-    document.getElementById('projects').style.color = "white";
-
-
-    document.getElementById(section).style.display = 'grid';
-    document.getElementById(tab).style.backgroundColor = "white";
-    document.getElementById(tab).style.color = "black";
-    // a = document.getElementsByClassName("project-list");
-    // for (i=0; i<a.length; i++) {
-    //   a[i].classList.toggle('changed');
-    // };
-
-  });
+  a = document.getElementByClassName(tab);
+  for (i=0; i<a.length; i++) {
+    a[i].addEventListener('click', function() {
+      a[i].classList.toggle("tab-change");
+      b = document.getElementByClassName(section);
+      for (x=0; x<b.length; x++) {
+        b[x].classList.toggle("content-change");
+      };
+    });
+  };
 };
 
-toggleState('projects', 'my-projects');
-toggleState('pledges', 'my-pledges');
+toggleState('tab', 'project-list');
