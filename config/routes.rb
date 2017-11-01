@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'search' =>'projects#search', :as => :search
 
-  resources :projects, only: [:index, :new, :create, :show] do
+  resources :projects do
     resources :project_updates, except: [:index]
     resources :pledges, only: [:create]
     resources :project_comments, only: [:create, :destroy]
