@@ -4,9 +4,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
-
     @successful_projects = []
-
     @projects.each do |project|
       if (project.pledges.map{|p|p.dollar_amount}.sum) >= project.goal
         @successful_projects << project
@@ -67,4 +65,5 @@ class ProjectsController < ApplicationController
     @search_tags = Tag.search(params[:search]).projects.all.to_a
     @projects = (@search_projects << @search_tags).flatten!
   end
+
 end
