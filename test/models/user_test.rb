@@ -31,4 +31,9 @@ class UserTest < ActiveSupport::TestCase
     user.save
     refute user.valid?
   end
+
+  test "display user's full name" do
+    user = build(:user)
+    assert_equal user.full_name, "Sally Lowenthal"
+  end
 end
