@@ -29,14 +29,29 @@
         <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
         <% end %>
       </figure>
-      <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
-      <p><%= truncate(project.description, :length => 80) %></p>
-      <hr>
-      <time class="project-days-left">
-        <%= icon('clock-o') %>
-        <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-        <p>Total Raised To Date: <%= number_to_currency(project.pledges.map{ |pledge| pledge.dollar_amount }.sum) %></p>
-        <p><%= number_with_precision(project.calculate_percentage, precision: 2)   %>% of Goal Raised</p>
+      <div class="project-padding">
+        <div class="project-recap">
+          <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
+          <p><%= truncate(project.description, :length => 80) %></p>
+        </div>
+        <div class="project-stats">
+          <hr>
+          <time class="project-days-left">
+            <%= icon('clock-o') %>
+            <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
+          </time>
+          <p>Total Raised To Date: <%= number_to_currency(project.pledges.map{ |pledge| pledge.dollar_amount }.sum) %></p>
+          <p><%= number_with_precision(project.calculate_percentage, precision: 2)   %>% of Goal Raised</p>
+        </div>
+          <!-- <div class="tags">
+          <% if project.tags.present? %>
+          <% project.tags.each do |tag| %>
+          <p><%= tag.name %></p>
+          <% end %>
+          <% end %>
+        </div> -->
+
+      </div>
         <% end %>
       </article>
       <% end %>
