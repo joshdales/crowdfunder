@@ -5,7 +5,7 @@
 <ul>
   <% @updates.each do |update| %>
       <li class="update">
-        <span class="update-title"><%= update.title %></span><br/>
+        <title class="update-title"><%= update.title %></title>
         <span class="update-description"><%= update.description %></span><br />
         Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %>
         <br/>

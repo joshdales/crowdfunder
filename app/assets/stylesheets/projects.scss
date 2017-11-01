@@ -94,13 +94,19 @@
         list-style: none;
 
       }
-      .update-links {
-        text-align: right;
-      }
       .update {
         box-shadow: -2px 4px 4px 2px rgba(#000000, 0.4);
         padding: 1rem;
         margin: 1rem 0;
+      }
+      .update-title {
+        display: block;
+        text-align: center;
+        font-size: 1.3rem;
+        line-height: 2;
+      }
+      .update-links {
+        text-align: right;
       }
     }
     .project-rewards {
