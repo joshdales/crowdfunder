@@ -3,6 +3,7 @@
 <% end %>
 
 <h1><%= @project.title %></h1>
+<p><%= link_to "Edit", edit_project_path(@project.id) %> | <%= link_to "Delete", project_path(@project.id), method: :delete, data: {confirm: "Are you sure you would like to delete this project?"} %></p>
 
 <h4>By
   <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>

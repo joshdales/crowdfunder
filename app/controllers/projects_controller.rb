@@ -65,4 +65,63 @@ class ProjectsController < ApplicationController
      @projects = Project.search(params[:search])
   end
 
+  def edit
+    @project = Project.find(params[:id])
+    @tags = Tag.all
+    if @project.user == current_user
+      render :edit
+    else
+      redirect_to login_path
+    end
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    if @project.user == current_user
+      @tags = Tag.all
+      @project.title = params[:project][:title]
+      @project.description = params[:project][:description]
+      @project.goal = params[:project][:goal]
+      # @project.start_date = params[:project][:start_date]
+
+      @project.start_date = DateTime.new(
+        params[:project]["start_date(1i)"].to_i,
+        params[:project]["start_date(2i)"].to_i,
+        params[:project]["start_date(3i)"].to_i,
+        params[:project]["start_date(4i)"].to_i,
+        params[:project]["start_date(5i)"].to_i
+      )
+
+      # @project.end_date = params[:project][:end_date]
+      @project.end_date = DateTime.new(
+        params[:project]["end_date(1i)"].to_i,
+        params[:project]["end_date(2i)"].to_i,
+        params[:project]["end_date(3i)"].to_i,
+        params[:project]["end_date(4i)"].to_i,
+        params[:project]["end_date(5i)"].to_i
+      )
+      @project.image = params[:project][:image]
+      @project.tag_ids = params[:project][:tag_ids]
+
+      if @project.save
+        redirect_to projects_url
+      else
+        render :edit
+      end
+    else
+      redirect_to login_path
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    if @project.user == current_user
+      @project.delete
+      redirect_to projects_url
+      flash[:notice] = "Project deleted."
+    else
+      redirect_to login_path
+    end
+  end
+
 end
