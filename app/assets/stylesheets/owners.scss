@@ -26,10 +26,28 @@
   }
 }
 
-.project-list.changed {
-  display: none;
+nav.owner-nav {
+  background-color: grey;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      display: inline-block;
+      button {
+        border: none;
+        background-color: white;
+        color:white;
+        padding: 1em 2em;
+      }
+    }
+  }
 }
 
+
+// .project-list.changed {
+//   display: none;
+// }
 
 .project-list{
   display: grid;

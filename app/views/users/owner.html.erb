@@ -10,15 +10,12 @@
   <h1><%= @owner.first_name %> <%= @owner.last_name %></h1>
   <p><%= @owner.first_name %> has backed a total of <%= number_to_currency(@owner.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>
 </section>
-<style>
-  #my-pledges {
-    display: none;
-  }
-</style>
 
-<nav>
-  <button id="projects">Projects</button>
-  <button id="pledges">Pledges</button>
+<nav class="owner-nav">
+  <ul>
+    <li><button id="projects">Projects</button></li>
+    <li><button id="pledges">Pledges</button></li>
+  </ul>
 </nav>
 
 <section class="project-list" id="my-projects">
@@ -65,33 +62,33 @@
   <% @backed_projects.each do |project| %>
     <article class="project">
       <%= link_to project, class: 'project-link' do %>
-      <figure class="project-image">
-        <% if project.image %>
-        <%= image_tag project.image %>
-        <% else %>
-        <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
-        <% end %>
-      </figure>
-      <div class="project-padding">
-        <div class="project-recap">
-          <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
-          <p><%= truncate(project.description, :length => 80) %></p>
-        </div>
-        <div class="project-stats">
-          <hr>
-          <h2>Pledged a total of <%= number_to_currency((@owner.pledges.where(project: project).map {|p| p.dollar_amount}).sum) %>!</h1>
+        <figure class="project-image">
+          <% if project.image %>
+          <%= image_tag project.image %>
+          <% else %>
+          <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+          <% end %>
+        </figure>
+        <div class="project-padding">
+          <div class="project-recap">
+            <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
+            <p><%= truncate(project.description, :length => 80) %></p>
+          </div>
+          <div class="project-stats">
+            <hr>
+            <h2>Pledged a total of <%= number_to_currency((@owner.pledges.where(project: project).map {|p| p.dollar_amount}).sum) %>!</h1>
+
+          </div>
+            <!-- <div class="tags">
+            <% if project.tags.present? %>
+            <% project.tags.each do |tag| %>
+            <p><%= tag.name %></p>
+            <% end %>
+            <% end %>
+          </div> -->
 
         </div>
-          <!-- <div class="tags">
-          <% if project.tags.present? %>
-          <% project.tags.each do |tag| %>
-          <p><%= tag.name %></p>
-          <% end %>
-          <% end %>
-        </div> -->
-
-      </div>
-        <% end %>
-      </article>
       <% end %>
+    </article>
+  <% end %>
 </section>
