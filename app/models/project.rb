@@ -12,6 +12,11 @@ class Project < ActiveRecord::Base
   validate :project_end_date_after_start
 
 
+  def calculate_percentage
+    pledge_total = pledges.map{ |pledge| pledge.dollar_amount }.sum
+    percent = (pledge_total / goal) * 100
+  end
+
   def project_start_not_in_past
     if start_date.present? && start_date < Date.today
       errors.add(:start_date, "can't be in the past")
