@@ -24,7 +24,3 @@
   </div>
 <% end %>
 </section>
-
-<% if current_user == @project.user %>
-  <%= link_to "Add new reward", new_project_reward_path(@project) %>
-<% end %>

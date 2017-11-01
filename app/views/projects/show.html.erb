@@ -56,6 +56,9 @@
 
   <section class="project-rewards">
     <h2>Rewards</h2>
+    <% if current_user == @project.user %>
+      <%= link_to "Add new reward", new_project_reward_path(@project) %>
+    <% end %>
       <%= render "rewards/rewards" %>
   </section>
 </section>
