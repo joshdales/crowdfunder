@@ -105,7 +105,12 @@
         font-size: 1.3rem;
         line-height: 2;
       }
+      .update-created {
+        line-height: 2;
+      }
       .update-links {
+        display: inline-block;
+        width: 76%;
         text-align: right;
       }
     }

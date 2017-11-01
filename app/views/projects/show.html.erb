@@ -35,7 +35,7 @@
         <h2>Hello, <%= current_user.first_name %>!</h2>
         <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
       <% end %>
-      <%= render '/pledges/form', pledge: @pledge %>
+      <%= render 'pledges/form', pledge: @pledge %>
     <% end %>
   </section>
 </section>

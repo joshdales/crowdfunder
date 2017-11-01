@@ -7,8 +7,7 @@
       <li class="update">
         <title class="update-title"><%= update.title %></title>
         <span class="update-description"><%= update.description %></span><br />
-        Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %>
-        <br/>
+        <span class="update-created">Created on <%= dateformat(update.created_at) %></span>
         <% if current_user == @project.user %>
           <div class="update-links"><%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %></div>
         <% end %>
