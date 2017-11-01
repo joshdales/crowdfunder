@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030211526) do
+ActiveRecord::Schema.define(version: 20171101193504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20171030211526) do
     t.datetime "updated_at"
     t.boolean "admin", default: false
     t.string "password_digest"
+    t.string "cover_pic", default: "crowdfunder_hero.jpg"
+    t.string "user_pic", default: "profile-pic-default.png"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
