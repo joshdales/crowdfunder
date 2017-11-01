@@ -3,11 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .hero-image{
-  background-image: asset-url("crowdfunder_hero.jpg");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    asset-url("crowdfunder_hero.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
   color: #ffffff;
+  padding: 10%;
+    h1{
+      margin: 1.5em 0;}
 }
 .project {
   text-align: center;
