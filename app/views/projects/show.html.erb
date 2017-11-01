@@ -48,9 +48,17 @@
     </section>
 
     <section class="project-comments">
-      <h2>Comments by Backers</h2>
+      <h2>Comments</h2>
       <%= render 'project_comments/comments' %>
-      <%= render 'project_comments/new_comment', project: @project, comment: @comment%>
+
+      <% if current_user && current_user.pledged_projects.include?(@project) || @project.user == current_user %>
+        <%= render 'project_comments/new_comment', project: @project, comment: @comment%>
+      <% elsif current_user %>
+        <p>Please back this project if you'd like to leave a comment.</p>
+      <% else %>
+        <p><%= link_to "Log in", user_sessions_path %> to leave a comment </p>
+      <% end %>
+
     </section>
   </section>
 
