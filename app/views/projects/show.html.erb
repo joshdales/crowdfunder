@@ -1,6 +1,6 @@
 <section class="project-header">
   <h1><%= @project.title %></h1>
-  <h4>By <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+  <h4>By <%= link_to "#{@project.user.full_name}", project_owner_path(@project, @project.user) %></h4>
 
   <% if @project.image.present? %>
   <%= image_tag @project.image %>

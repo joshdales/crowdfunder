@@ -3,7 +3,7 @@
     <% @project.project_comments.each do |project_comment| %>
       <% if project_comment.persisted? %>
         <li>
-          <p class="commenter"><%= project_comment.user.first_name %> said:</p>
+          <p class="commenter"><%= project_comment.user.full_name %> said:</p>
           <p class="comment"><%= project_comment.comment %></p>
           <small class="comment-date">Created at <%= dateformat(project_comment.created_at) %></small>
           <% if current_user == project_comment.user %>

@@ -1,4 +1,4 @@
-<h1><%= @owner.first_name %> <%= @owner.last_name %></h1>
+<h1><%= @owner.full_name %></h1>
 <p><%= @owner.first_name %> has backed a total of <%= number_to_currency(@owner.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>
 
 

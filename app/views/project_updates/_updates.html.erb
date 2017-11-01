@@ -9,7 +9,7 @@
         <span class="update-description"><%= update.description %></span><br />
         <span class="update-created">Created on <%= dateformat(update.created_at) %></span>
         <% if current_user == @project.user %>
-          <div class="update-links"><%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %></div>
+          <div class="update-links"><%= link_to "Edit", edit_project_project_update_path(@project, update) %> | <%= link_to "Delete", project_project_update_path(@project, update), method: :delete, data: {confirm: "Are you sure?"} %></div>
         <% end %>
       </li>
   <% end %>
