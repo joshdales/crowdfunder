@@ -1,0 +1,30 @@
+<% if @project.user == current_user %>
+  <%= link_to "Add Update", new_project_project_update_path(@project)%>
+<% end %>
+
+<ul>
+  <% @updates.each do |update| %>
+      <li class="update">
+        <title class="update-title"><%= update.title %></title>
+        <span class="update-description"><%= update.description %></span><br />
+        <span class="update-created">Created on <%= dateformat(update.created_at) %></span>
+        <% if current_user == @project.user %>
+          <div class="update-links"><%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %></div>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
+
+<% if current_user && current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
+  <ul>
+    <% @pledger_updates.each do |update| %>
+      <li><%= update.title %><br />
+        <%= update.description %><br />
+        Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
+        <% if current_user == @project.user %>
+        <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

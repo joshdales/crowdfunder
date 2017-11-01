@@ -17,9 +17,10 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @rewards = @project.rewards.sort_by { |r| r.dollar_amount}
+    @pledge = Pledge.new
     @updates = @project.project_updates.where("created_at < ?", @project.end_date)
     @pledger_updates = @project.project_updates.where("created_at > ?", @project.end_date).reverse
-    @project_comment = @project.project_comments.build
+    @comment = ProjectComment.new
   end
 
   def new
