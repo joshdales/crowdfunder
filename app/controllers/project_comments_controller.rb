@@ -1,9 +1,10 @@
 class ProjectCommentsController < ApplicationController
-  before_action :load_project
 
   def create
-    @project_comment = @project.project_comments.build
+    @project = Project.find(params[:project_id])
+    @project_comment = ProjectComment.new
     @project_comment.user = current_user
+    @project_comment.project = @project
     @project_comment.comment = params[:project_comment][:comment]
 
     if @project_comment.save
@@ -16,15 +17,11 @@ class ProjectCommentsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
     @project_comment = @project.project_comments.find(params[:id])
     @project_comment.destroy
     flash[:notice] = "Your comment has been successfully deleted!"
     redirect_to project_url(@project)
   end
 
-  private
-
-  def load_project
-    @project = Project.find(params[:project_id])
-  end
 end

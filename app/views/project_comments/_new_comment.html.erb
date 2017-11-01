@@ -1,0 +1,11 @@
+<%= form_for [project, comment] do |f| %>
+
+<p>
+  <%= f.text_area :comment, placeholder: "Write your comment here!" %>
+</p>
+
+<p>
+  <%= f.submit %>
+</p>
+
+<% end %>

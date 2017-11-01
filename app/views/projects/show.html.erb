@@ -1,7 +1,5 @@
 <section class="project-header">
-
   <h1><%= @project.title %></h1>
-
   <h4>By <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
 
   <% if @project.image.present? %>
@@ -45,15 +43,19 @@
 <section class="main-content">
   <section class="updates-and-comments">
     <section class="project-updates">
+      <h2>Updates</h2>
       <%= render 'project_updates/updates' %>
     </section>
 
     <section class="project-comments">
-      <%= render 'comments/comments' %>
+      <h2>Comments by Backers</h2>
+      <%= render 'project_comments/new_comment', project: @project, comment: @comment%>
+      <%= render 'project_comments/comments' %>
     </section>
   </section>
 
   <section class="project-rewards">
+    <h2>Rewards</h2>
       <%= render "rewards/rewards" %>
   </section>
 </section>

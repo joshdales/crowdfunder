@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :new, :create, :show] do
     resources :project_updates, except: [:index]
     resources :pledges, only: [:create]
+    resources :project_comments, only: [:create, :destroy]
     resources :rewards, only: [:new, :create, :destroy, :update] do
       member do
         patch :claim
       end
     end
-    resources :project_comments, only: [:create, :destroy]
   end
   resources :users, only: [:new, :create, :show]
   resources :user_sessions, only: [:create]
