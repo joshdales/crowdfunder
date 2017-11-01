@@ -1,3 +1,4 @@
+<p><%= link_to "New Project", new_project_path %></p>
 <section class="hero-image">
   <h1><%= Project.all.count %>
     <% if Project.all.count == 1 %>
@@ -17,22 +18,22 @@
     have been pledged towards successful projects</h1>
 </section>
 
-<p><%= link_to "New Project", new_project_path %></p>
-
-<% @projects.each do |project| %>
-<article class="project">
-  <%= link_to project, class: 'project-link' do %>
-  <figure class="project-image">
-    <% if project.image %>
-    <%= image_tag project.image %>
-  <% else %>
-    <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
-    <% end %>
-  </figure>
-  <h1 class="project-title"><%= project.title %></h1>
-  <time class="project-days-left">
-    <%= icon('clock-o') %>
-    <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-  <% end %>
-</article>
-<% end %>
+<section class="project-list">
+  <% @projects.each do |project| %>
+    <article class="project">
+      <%= link_to project, class: 'project-link' do %>
+      <figure class="project-image">
+        <% if project.image %>
+        <%= image_tag project.image %>
+        <% else %>
+        <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+        <% end %>
+      </figure>
+      <h1 class="project-title"><%= project.title %></h1>
+      <time class="project-days-left">
+        <%= icon('clock-o') %>
+        <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+        <% end %>
+      </article>
+      <% end %>
+</section>
