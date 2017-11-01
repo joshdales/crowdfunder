@@ -79,9 +79,25 @@ nav.site-nav ul, nav.user-nav ul {
 }
 
 
-
+// Footer Styles
 
 .site-footer {
   background-color: grey;
   color: white;
+  padding: 2% 0;
+}
+
+.site-footer h2 {
+  text-align: center;
+  margin: 1% 0 1% 0;
+}
+
+.col {
+  display: inline-block;
+  margin: 0 1%;
+  width: 20%;
+}
+
+.contributors {
+  text-align: center;
 }
