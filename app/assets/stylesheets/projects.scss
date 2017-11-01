@@ -61,12 +61,16 @@
     .tags {
       grid-column: 3 / 12;
       grid-row: 3;
+      margin: 1rem 0 1rem;
       p {
         background-color: cadetblue;
-      display: inline-block;
+        display: inline-block;
+        margin-right: 1rem;
       a{
         text-decoration: none;
         color: white;
+        line-height: 1.5;
+        padding: 0 1.5rem;
       }
     }
     }
