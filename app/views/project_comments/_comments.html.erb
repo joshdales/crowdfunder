@@ -7,13 +7,12 @@
     <% @project.project_comments.each do |project_comment| %>
       <% if project_comment.persisted? %>
         <li>
-          <p><%= project_comment.user.first_name %> said:</p>
-          <p><%= project_comment.comment %></p>
-          <p>Created at <%= dateformat(project_comment.created_at) %>
+          <p class="commenter"><%= project_comment.user.first_name %> said:</p>
+          <p class="comment"><%= project_comment.comment %></p>
+          <small class="comment-date">Created at <%= dateformat(project_comment.created_at) %></small>
           <% if current_user == project_comment.user %>
             <%= link_to("Delete", project_project_comment_path(@project, project_comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?"}) %>
           <% end %>
-          </p>
         </li>
       <% end %>
     <% end %>
