@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     @projects = @projects.order(:end_date)
 
     @successful_projects = []
-
+    # @pledges = @project.pledges.map { |pledge| pledge.dollar_amount }.sum
     @projects.each do |project|
       if (project.pledges.map{|p|p.dollar_amount}.sum) >= project.goal
         @successful_projects << project

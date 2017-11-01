@@ -29,10 +29,13 @@
         <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
         <% end %>
       </figure>
-      <h1 class="project-title"><%= project.title %></h1>
+      <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
+      <p><%= truncate(project.description, :length => 80) %></p>
+      <hr>
       <time class="project-days-left">
         <%= icon('clock-o') %>
         <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+        <p>Total Raised To Date: <%= number_to_currency(project.pledges.map{ |pledge| pledge.dollar_amount }.sum) %></p>
         <% end %>
       </article>
       <% end %>
