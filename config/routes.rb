@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :project_updates, except: [:index]
     resources :pledges, only: [:create]
+    resources :project_comments, only: [:create, :destroy]
     resources :rewards, only: [:new, :create, :destroy, :update] do
       member do
         patch :claim

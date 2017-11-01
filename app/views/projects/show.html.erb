@@ -1,97 +1,75 @@
-<% if @project.image.present? %>
+<section class="project-header">
+  <h1><%= @project.title %></h1>
+  <h4>By <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+
+  <% if @project.image.present? %>
   <%= image_tag @project.image %>
-<% end %>
-
-<h1><%= @project.title %></h1>
-<p><%= link_to "Edit", edit_project_path(@project.id) %> | <%= link_to "Delete", project_path(@project.id), method: :delete, data: {confirm: "Are you sure you would like to delete this project?"} %></p>
-
-<h4>By
-  <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
-
-<% if @project.tags.present? %>
-  <% @project.tags.each do |tag| %>
-    <p><%= tag.name %></p>
-  <% end %>
-<% end %>
-
-<p><%= @project.description %></p>
-<p>Goal: <%= number_to_currency(@project.goal) %></p>
-<p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
-<p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
-<time>
-  <%= icon('clock-o') %>
-  <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-  <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
-
-  <% unless current_user == @project.user %>
-  <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
-  <h2>Enter an amount to pledge below!</h2>
   <% else %>
-  <h2>Hello, <%= current_user.first_name %>!</h2>
-  <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
-  <% end %>
-  <%= render '/pledges/form', pledge: @pledge %>
+  <div style="background-image: url(<%= ActionController::Base.helpers.asset_path("default.jpg") %>)"></div>
   <% end %>
 
-<h2>Updates</h2>
-
-  <% if @project.user == current_user %>
-  <%= link_to "Add Update", new_project_project_update_path(@project)%>
-  <% end %>
-
-  <ul>
-    <% @updates.each do |update| %>
-    <li><%= update.title %><br />
-      <%= update.description %><br />
-      Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
-      <% if current_user == @project.user %>
-      <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% if @project.tags.present? %>
+    <div class="tags">
+      <% @project.tags.each do |tag| %>
+        <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
       <% end %>
-    </li>
-    <% end %>
-  </ul>
-
-<% if current_user && current_user.pledged_projects == @project && @project.goal >= @project.pledges.sum %>
-  <ul>
-    <% @pledger_updates.each do |update| %>
-      <li><%= update.title %><br />
-        <%= update.description %><br />
-        Created at <%= dateformat(update.created_at) %> | Updated at <%= dateformat(update.updated_at) %><br />
-        <% if current_user == @project.user %>
-        <%= link_to "Edit", edit_project_project_update_path(@project.id, update.id) %> | <%= link_to "Delete", project_project_update_path(@project.id, update.id), method: :delete, data: {confirm: "Are you sure?"} %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<h2>Rewards</h2>
-<% @rewards.each do |reward| %>
-  <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
-  <p><%= reward.description %></p>
-  <%= form_tag(claim_project_reward_path(@project, reward), method: "patch") do %>
-    <%= submit_tag("Pledge and Claim this Reward") %>
-  <% end %>
-  <p>Claimed: <%= reward.claimed %>
-  <% if reward.limit %>
-    | Total available: <%= reward.limit %></p>
-  <% else %>
-    | No limits have been set for this reward.</p>
+    </div>
   <% end %>
 
-  <p>
-    <small>
-      <% if current_user == @project.user %>
-      <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+  <p class="description"><%= @project.description %></p>
+
+  <section class="goal-details">
+    <p>Goal: <%= number_to_currency(@project.goal) %></p>
+    <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
+    <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+    <time>
+      <%= icon('clock-o') %>
+      <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
+    </time>
+    <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
+
+    <% unless current_user == @project.user %>
+      <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
+        <h2>Enter an amount to pledge below!</h2>
+      <% else %>
+        <h2>Hello, <%= current_user.first_name %>!</h2>
+        <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
       <% end %>
-    </small>
-  </p>
-  <p>-----------</p>
-<% end %>
+      <%= render 'pledges/form', pledge: @pledge %>
+    <% end %>
+  </section>
+</section>
 
-<% if current_user == @project.user %>
-<%= link_to "Add new reward", new_project_reward_path(@project) %>
-<% end %>
+<section class="main-content">
+  <section class="updates-and-comments">
+    <section class="project-updates">
+      <h2>Updates</h2>
+      <%= render 'project_updates/updates' %>
+    </section>
+
+    <section class="project-comments">
+      <h2>Comments</h2>
+      <%= render 'project_comments/comments' %>
+
+      <% if current_user && current_user.pledged_projects.include?(@project) || @project.user == current_user %>
+        <%= render 'project_comments/new_comment', project: @project, comment: @comment%>
+      <% elsif current_user %>
+        <p>Please back this project if you'd like to leave a comment.</p>
+      <% else %>
+        <p><%= link_to "Log in", user_sessions_path %> to leave a comment </p>
+      <% end %>
+
+    </section>
+  </section>
+
+  <section class="project-rewards">
+    <h2>Rewards</h2>
+    <% if current_user == @project.user %>
+      <%= link_to "Add new reward", new_project_reward_path(@project) %>
+    <% end %>
+      <%= render "rewards/rewards" %>
+  </section>
+</section>
 
 <% if @project.user == current_user %>
   <h2>Who pledged so far:</h2>
@@ -100,4 +78,4 @@
     <li><%= user.first_name %> <%= user.last_name %></li>
     <% end %>
   </ul>
-<% end %>
+  <% end %>
