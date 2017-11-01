@@ -11,7 +11,7 @@
   <p><%= @owner.first_name %> has backed a total of <%= number_to_currency(@owner.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>
 </section>
 
-<nav class="owner-nav">
+<nav class="profile-nav">
   <ul>
     <li><button id="projects">Projects</button></li>
     <li><button id="pledges">Pledges</button></li>
