@@ -1,25 +1,25 @@
 <section class="project-header">
+
+  <h1><%= @project.title %></h1>
+
+  <h4>By <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+
   <% if @project.image.present? %>
-    <%= image_tag @project.image %>
+  <%= image_tag @project.image %>
   <% else %>
   <div style="background-image: url(<%= ActionController::Base.helpers.asset_path("default.jpg") %>)"></div>
   <% end %>
 
-  <h1><%= @project.title %></h1>
-
-  <h4>By
-    <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
-
   <% if @project.tags.present? %>
     <div class="tags">
-
-    <% @project.tags.each do |tag| %>
-      <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
-    <% end %>
-  </div>
+      <% @project.tags.each do |tag| %>
+        <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
+      <% end %>
+    </div>
   <% end %>
 
   <p class="description"><%= @project.description %></p>
+
   <section class="goal-details">
     <p>Goal: <%= number_to_currency(@project.goal) %></p>
     <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
@@ -49,15 +49,14 @@
     </section>
 
     <section class="project-comments">
-    <%= render 'comments/comments' %>
+      <%= render 'comments/comments' %>
     </section>
   </section>
 
-    <section class="project-rewards">
-      <div class="reward">
-        <%= render "rewards/rewards" %>
-    </section>
+  <section class="project-rewards">
+      <%= render "rewards/rewards" %>
   </section>
+</section>
 
 <% if @project.user == current_user %>
   <h2>Who pledged so far:</h2>

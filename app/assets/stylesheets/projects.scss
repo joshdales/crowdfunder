@@ -61,7 +61,12 @@
       grid-column: 2 / 12;
       grid-row: 3;
       p {
+        background-color: cadetblue;
       display: inline-block;
+      a{
+        text-decoration: none;
+        color: white;
+      }
     }
     }
   }
@@ -79,8 +84,10 @@
 
     .project-rewards {
       grid-column: 5 / 7;
-      max-height: 700px;
-      overflow: scroll;
+      .all-rewards {
+        max-height: 700px;
+        overflow: scroll;
+      }
       .reward {
         text-align: center;
         padding: 5px;

@@ -1,4 +1,5 @@
 <h2>Rewards</h2>
+<section class="all-rewards">
 <% @rewards.each do |reward| %>
   <div class="reward">
     <p>Pledge <%= number_to_currency(reward.dollar_amount) %></p>
@@ -23,6 +24,7 @@
     <p>-----------</p>
   </div>
 <% end %>
+</section>
 
 <% if current_user == @project.user %>
   <%= link_to "Add new reward", new_project_reward_path(@project) %>
