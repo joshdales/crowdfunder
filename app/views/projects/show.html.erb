@@ -49,42 +49,7 @@
     </section>
 
     <section class="project-comments">
-      <h2>Comments by Backers</h2>
-      <% unless current_user %>
-        <p>Please log in to leave a comment</p>
-      <% end %>
-      <% if @project.project_comments.any? %>
-        <ul>
-          <% @project.project_comments.each do |project_comment| %>
-            <% if project_comment.persisted? %>
-              <li>
-                <p><%= project_comment.user.first_name %> said:</p>
-                <p><%= project_comment.comment %></p>
-                <p>Created at <%= dateformat(project_comment.created_at) %>
-                <% if current_user == project_comment.user %>
-                  | <%= link_to("Delete", project_project_comment_path(@project, project_comment), method: :delete, data: { confirm: "Are you sure you want to delete your comment?"}) %>
-                <% end %>
-                </p>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>No comments have been left yet.</p>
-      <% end %>
-
-      <% if current_user && current_user.pledged_projects.include?(@project) %>
-        <h3>Add Comment</h3>
-        <%= form_for([@project, @project_comment]) do |f| %>
-          <div>
-            <%= f.label :comment %>:
-            <%= f.text_area :comment %>
-          </div>
-          <div>
-            <%= f.submit "Submit Comment" %>
-          </div>
-        <% end %>
-      <% end %>
+    <%= render 'comments/comments' %>
     </section>
   </section>
 
