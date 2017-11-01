@@ -29,6 +29,7 @@
     <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
 
     <% unless current_user == @project.user %>
+      <div class="pledge">
       <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
         <h2>Enter an amount to pledge below!</h2>
       <% else %>
@@ -36,6 +37,7 @@
         <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
       <% end %>
       <%= render 'pledges/form', pledge: @pledge %>
+    </div>
     <% end %>
   </section>
 </section>

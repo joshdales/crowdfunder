@@ -75,7 +75,7 @@
     display: grid;
     grid-template-columns: repeat(14, 6fr);
     grid-template-rows: repeat(10, 60px);
-    background-color: #cfcfcf;
+    background-color: #f9f9f9;
     h1 {
       grid-column: 3 / 5;
       grid-row: 1;
@@ -99,6 +99,11 @@
     .goal-details {
       grid-column: 11 / 16;
       grid-row: 4 / 10;
+      color: cadetblue;
+    }
+    .pledge {
+      color: black;
+      margin: 3rem 0;
     }
     .tags {
       grid-column: 3 / 12;
