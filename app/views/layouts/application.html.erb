@@ -13,24 +13,34 @@
 
   <body>
     <header class="site-header">
-      <h1 class="logo">Crowdfunder</h1>
 
       <nav class="site-nav">
-        <%= link_to "Home", root_url %>
+        <ul>
+          <li><%= link_to "Home", root_url %></li>
+          <li><%= link_to "New Project", new_project_path %></li>
+        </ul>
+      </nav>
 
+      <h1 class="logo">Crowdfunder</h1>
+
+      <div class = "search-bar"
         <%= form_tag(search_path, method: "get") do %>
           <%= label_tag(:search, "Search", placeholder: "Search for a project") %>
           <%= text_field_tag(:search) %>
           <%= submit_tag("Search") %>
         <% end %>
+      </div>
 
-        <% if current_user %>
-          <%= link_to "Logout", :logout, method: :delete %> |
-          <%= link_to "Your Profile", user_path(current_user) %>
-        <% else %>
-          <%= link_to "Register", new_user_path %> |
-          <%= link_to "Login", :login %>
-        <% end %>
+      <nav class = "user-nav">
+        <ul>
+          <% if current_user %>
+            <li><%= link_to "Logout", :logout, method: :delete %> |</li>
+            <li><%= link_to "Your Profile", user_path(current_user) %></li>
+          <% else %>
+            <li><%= link_to "Register", new_user_path %> |</li>
+            <li><%= link_to "Login", :login %></li>
+          <% end %>
+        </ul>
       </nav>
     </header>
 
