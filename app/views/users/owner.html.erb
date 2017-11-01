@@ -91,4 +91,9 @@
       <% end %>
     </article>
   <% end %>
+
+  <% if @backed_projects.length == 0 %>
+  <p>No pledges have been made yet.</p>
+  <% end %>
+
 </section>
