@@ -1,11 +1,4 @@
-<section class="hero-image">
-  <style>
-    .hero-image {
-      background-image:
-        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-        asset-url(<%= @user.cover_pic %>);
-    }
-  </style>
+<section class="hero-image" style="background-image: url(<%= @user.cover_pic %>)">
 <div class="profile-img"><%= image_tag @user.user_pic %></div>
 <h1>Hi <%= current_user.first_name %></h1>
 <p>You have backed a total of <%= number_to_currency(current_user.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>

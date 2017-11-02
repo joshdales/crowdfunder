@@ -13,7 +13,7 @@ Project.destroy_all
   )
 end
 
-10.times do
+12.times do
   project = Project.create!(
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
