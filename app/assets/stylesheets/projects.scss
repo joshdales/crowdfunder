@@ -56,7 +56,9 @@
     }
   }
 }
-
+.cover img{
+  max-height: 100%;
+}
 .project-image > img {
   margin: auto;
 }
@@ -92,6 +94,7 @@
   }
   .cover {
     margin: 1em;
+    text-align: center;
   }
   .goal-details {
     grid-column: 11 / 16;
