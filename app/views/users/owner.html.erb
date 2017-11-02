@@ -1,22 +1,99 @@
-<h1><%= @owner.full_name %></h1>
-<p><%= @owner.first_name %> has backed a total of <%= number_to_currency(@owner.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>
+<section class="hero-image">
+  <style>
+    .hero-image {
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        asset-url(<%= @owner.cover_pic %>);
+    }
+  </style>
+<div class="profile-img"><%= image_tag @owner.user_pic %></div>
+  <h1><%= @owner.first_name %> <%= @owner.last_name %></h1>
+  <p><%= @owner.first_name %> has backed a total of <%= number_to_currency(@owner.pledges.map {|pledge| pledge.dollar_amount}.sum) %> on Crowfunder!</p>
+</section>
+
+<nav class="profile-nav">
+  <ul>
+    <li><button id="projects">Projects</button></li>
+    <li><button id="pledges">Pledges</button></li>
+  </ul>
+</nav>
+
+<section class="project-list" id="my-projects">
+  <% @owner.projects.each do |project| %>
+    <article class="project">
+      <%= link_to project, class: 'project-link' do %>
+      <figure class="project-image">
+        <% if project.image %>
+        <%= image_tag project.image %>
+        <% else %>
+        <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+        <% end %>
+      </figure>
+      <div class="project-padding">
+        <div class="project-recap">
+          <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
+          <p><%= truncate(project.description, :length => 80) %></p>
+        </div>
+        <div class="project-stats">
+          <hr>
+          <time class="project-days-left">
+            <%= icon('clock-o') %>
+            <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
+          </time>
+          <p>Total Raised To Date: <%= number_to_currency(project.pledges.map{ |pledge| pledge.dollar_amount }.sum) %></p>
+          <p><%= number_with_precision(project.calculate_percentage, precision: 2)   %>% of Goal Raised</p>
+        </div>
+          <!-- <div class="tags">
+          <% if project.tags.present? %>
+          <% project.tags.each do |tag| %>
+          <p><%= tag.name %></p>
+          <% end %>
+          <% end %>
+        </div> -->
+
+      </div>
+        <% end %>
+      </article>
+      <% end %>
+</section>
 
 
-<h2>Projects</h2>
-<% @owner.projects.each do |project| %>
-  <h3><%= link_to "#{project.title}", project_path(project.id) %></h3>
-  <time>
-    <%= icon('clock-o') %>
-    <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-  <p>Total Raised To Date: <%= number_to_currency(project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
-<% end %>
+<section class="project-list" id="my-pledges">
+  <% @backed_projects.each do |project| %>
+    <article class="project">
+      <%= link_to project, class: 'project-link' do %>
+        <figure class="project-image">
+          <% if project.image %>
+          <%= image_tag project.image %>
+          <% else %>
+          <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
+          <% end %>
+        </figure>
+        <div class="project-padding">
+          <div class="project-recap">
+            <h1 class="project-title"><%= project.title %><span> by <%= project.user.first_name %></span></h1>
+            <p><%= truncate(project.description, :length => 80) %></p>
+          </div>
+          <div class="project-stats">
+            <hr>
+            <h2>Pledged a total of <%= number_to_currency((@owner.pledges.where(project: project).map {|p| p.dollar_amount}).sum) %>!</h1>
 
-<h2>Backed Projects</h2>
-<% @backed_projects.each do |backed_project| %>
-  <h3><%= link_to "#{backed_project.title}", project_path(backed_project.id) %></h3>
-  <% @owner.pledges.where(project: backed_project).each do |pledge| %>
-    <ul>
-      <li><%= number_to_currency(pledge.dollar_amount) %></li>
-    </ul>
+          </div>
+            <!-- <div class="tags">
+            <% if project.tags.present? %>
+            <% project.tags.each do |tag| %>
+            <p><%= tag.name %></p>
+            <% end %>
+            <% end %>
+          </div> -->
+
+        </div>
+      <% end %>
+    </article>
   <% end %>
-<% end %>
+
+  <% if @backed_projects.length == 0 %>
+  <p>No pledges have been made yet.</p>
+  <% end %>
+
+</section>

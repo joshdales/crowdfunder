@@ -65,10 +65,6 @@
   margin-bottom: 0;
 }
 
-.project-days-left {
-  font-size: 0.75em;
-}
-
 
 @media ( min-width: 1024px ) {
   .project-header {
@@ -208,4 +204,9 @@
     }
   }
 
+}
+@media ( max-width: 768px ) {
+  .project-list{
+    display: block;
+  }
 }
