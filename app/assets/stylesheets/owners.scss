@@ -100,7 +100,6 @@ nav.profile-nav {
 }
 
 
-@media ( min-width: 1024px ) {
   .project-header {
     display: grid;
     grid-template-columns: repeat(14, 6fr);
@@ -149,88 +148,86 @@ nav.profile-nav {
   }
 
 
-  .main-content {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(6, 6fr);
-    grid-gap: 0.7rem;
-    .updates-and-comments {
-      grid-column: 1 / 5;
-      margin: 0 1.3rem;
-    }
-    .project-updates {
-      h2 {
-        display: inline-block;
-        margin-right: 3rem;
-      }
-      a {
-        font-size: 0.75rem;
-      }
-      ul {
-        padding-left: 0;
-        list-style: none;
-
-      }
-      .update {
-        box-shadow: -2px 4px 4px 2px rgba(#000000, 0.4);
-        padding: 1rem;
-        margin: 1rem 0;
-      }
-      .update-title {
-        display: block;
-        text-align: center;
-        font-size: 1.3rem;
-        line-height: 2;
-      }
-      .update-created {
-        line-height: 2;
-      }
-      .update-links {
-        display: inline-block;
-        width: 76%;
-        text-align: right;
-      }
-    }
-    .project-comments {
-      h2 {
-        line-height: 2;
-      }
-      p {
-        margin: 0.5rem 0;
-      }
-      ul {
-        list-style: none;
-        padding-left: 0;
-      }
-      li {
-        border-top: 1px solid lightgrey;
-        margin-bottom: 0.5rem;
-        padding-left: 1rem;
-      }
-    }
-    textarea {
-      width: 30rem;
-      height: 5rem;
-    }
-
-    .project-rewards {
-      grid-column: 5 / 7;
-      h2 {
-        display: inline-block;
-        margin-right: 3rem;
-      }
-      .all-rewards {
-        max-height: 700px;
-        overflow: scroll;
-      }
-      .reward {
-        text-align: center;
-        padding: 5px;
-        width: 95%;
-        margin: 15px auto;
-        box-shadow: 2px 4px 4px 2px rgba(#000000, 0.4)
-      }
-    }
-  }
-
-}
+  // .main-content {
+  //   margin-top: 15px;
+  //   display: grid;
+  //   grid-template-columns: repeat(6, 6fr);
+  //   grid-gap: 0.7rem;
+  //   .updates-and-comments {
+  //     grid-column: 1 / 5;
+  //     margin: 0 1.3rem;
+  //   }
+  //   .project-updates {
+  //     h2 {
+  //       display: inline-block;
+  //       margin-right: 3rem;
+  //     }
+  //     a {
+  //       font-size: 0.75rem;
+  //     }
+  //     ul {
+  //       padding-left: 0;
+  //       list-style: none;
+  //
+  //     }
+  //     .update {
+  //       box-shadow: -2px 4px 4px 2px rgba(#000000, 0.4);
+  //       padding: 1rem;
+  //       margin: 1rem 0;
+  //     }
+  //     .update-title {
+  //       display: block;
+  //       text-align: center;
+  //       font-size: 1.3rem;
+  //       line-height: 2;
+  //     }
+  //     .update-created {
+  //       line-height: 2;
+  //     }
+  //     .update-links {
+  //       display: inline-block;
+  //       width: 76%;
+  //       text-align: right;
+  //     }
+  //   }
+  //   .project-comments {
+  //     h2 {
+  //       line-height: 2;
+  //     }
+  //     p {
+  //       margin: 0.5rem 0;
+  //     }
+  //     ul {
+  //       list-style: none;
+  //       padding-left: 0;
+  //     }
+  //     li {
+  //       border-top: 1px solid lightgrey;
+  //       margin-bottom: 0.5rem;
+  //       padding-left: 1rem;
+  //     }
+  //   }
+  //   textarea {
+  //     width: 30rem;
+  //     height: 5rem;
+  //   }
+  //
+  //   .project-rewards {
+  //     grid-column: 5 / 7;
+  //     h2 {
+  //       display: inline-block;
+  //       margin-right: 3rem;
+  //     }
+  //     .all-rewards {
+  //       max-height: 700px;
+  //       overflow: scroll;
+  //     }
+  //     .reward {
+  //       text-align: center;
+  //       padding: 5px;
+  //       width: 95%;
+  //       margin: 15px auto;
+  //       box-shadow: 2px 4px 4px 2px rgba(#000000, 0.4)
+  //     }
+  //   }
+  // }
