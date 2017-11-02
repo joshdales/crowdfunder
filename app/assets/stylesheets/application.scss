@@ -140,19 +140,13 @@ nav.site-nav ul, nav.user-nav ul {
   box-shadow: 1px 2px 2px 1px rgba(#000000, 0.1);
   background-color: #f9f9f9;
 
-  .field,
-  .field_with_errors {
-    margin: 2rem 3rem;
+  .field {
+    margin: 2rem 2rem;
     display: flex;
     justify-content: space-between;
-
-    label {
+    .field_with_errors {
       display: inline-block;
-    }
-
-    input {
-      display: inline-block;
-      width: 50%
+      border-bottom: 1px solid red;
     }
   }
 }
