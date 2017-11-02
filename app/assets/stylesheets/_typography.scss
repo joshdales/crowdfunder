@@ -19,3 +19,11 @@ title {
   line-height: 1.1;
   letter-spacing: 0.05em;
 }
+
+a{
+  text-decoration: none;
+  color: cadetblue;
+}
+a:hover {
+  color: darken(cadetblue, 8%);;
+}

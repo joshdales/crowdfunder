@@ -21,15 +21,14 @@
   <p class="description"><%= @project.description %></p>
 
   <section class="goal-details">
-    <p>Goal: <%= number_to_currency(@project.goal) %></p>
-    <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
-    <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+    <p><span style="font-weight: 700">Goal:</span> <%= number_to_currency(@project.goal) %></p>
+    <p><span style="font-weight: 700">Fundraising starts:</span>  <%= @project.start_date.strftime("%A %b %d %Y") %></p>
+    <p><span style="font-weight: 700">Deadline:</span>  <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+    <p><span style="font-weight: 700">Total Raised To Date:</span> <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
     <time>
       <%= icon('clock-o') %>
       <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
     </time>
-    <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
-
     <% unless current_user == @project.user %>
       <div class="pledge">
       <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
