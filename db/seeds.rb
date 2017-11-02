@@ -18,6 +18,7 @@ end
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
               goal: rand(100000),
+              image: "http://lorempixel.com/1000/500/",
               start_date: Time.now.utc,
               end_date: Time.now.utc + rand(10).days,
               user: User.all.sample
