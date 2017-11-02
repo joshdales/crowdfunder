@@ -7,39 +7,39 @@
     </ul>
   <% end %>
 
-  <div>
+  <p>
     <%= f.label :title %>
     <%= f.text_field :title %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :description %>
     <%= f.text_field :description %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :goal %>
     <%= f.number_field :goal %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :image %>
     <%= f.text_field :image %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :end_date %>
     <%= f.datetime_select :end_date %>
-  </div>
+  </p>
 
-  <div class="">
+  <p class="">
     <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
-  </div>
+  </p>
 
   <%= f.submit %>
 <% end %>

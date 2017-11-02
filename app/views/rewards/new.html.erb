@@ -7,20 +7,20 @@
     </ul>
   <% end %>
 <%= form_for [@project, @reward] do |f| %>
-  <div>
+  <p>
     <%= f.label :dollar_amount %>
     <%= f.number_field :dollar_amount, step: 0.01 %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :description %>
     <%= f.text_area :description %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.label :limit %> (Optional)
     <%= f.number_field :limit %>
-  </div>
+  </p>
 
   <%= f.submit %>
 <% end %>
