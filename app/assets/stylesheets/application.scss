@@ -26,6 +26,18 @@
   width: 100%;
   height: 60px;
   background-color: white;
+  a {
+    font-family: sans-serif;
+    color: cadetblue;
+    text-decoration: none;
+    padding: 0.5em;
+    border: 0;
+
+    &:hover {
+      color: white;
+      background-color: cadetblue;
+    }
+  }
 }
 
 body {
