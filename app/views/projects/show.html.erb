@@ -1,6 +1,6 @@
 <section class="project-header">
   <h1><%= @project.title %></h1>
-  <h4>By <%= link_to "#{@project.user.full_name}", project_owner_path(@project, @project.user) %></h4>
+  <h4><%= link_to "#{@project.user.full_name}", project_owner_path(@project, @project.user) %></h4>
   <div class="profile-img"><%= image_tag @project.user.user_pic %></div>
 
 
