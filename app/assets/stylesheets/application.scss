@@ -111,20 +111,22 @@ nav.site-nav ul, nav.user-nav ul {
   width: 40%;
   box-shadow: 1px 2px 2px 1px rgba(#000000, 0.1);
   background-color: #f9f9f9;
+  @include clearfix;
 
   .field {
-    margin: 1rem;
-
-    p {
-      width: fit-content;
-    }
+    margin: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
 
     label {
       display: inline-block;
+      margin: 0 auto 0 1rem;
     }
 
     input {
       display: inline-block;
+      margin: 0 1rem 0 auto;
+
     }
   }
 }

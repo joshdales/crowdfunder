@@ -1,3 +1,12 @@
 // Typography
 $base-font-family: 'Libre Baskerville', Baskerville, serif;
 $header-font-family: 'Josefin Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
