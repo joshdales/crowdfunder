@@ -1,6 +1,6 @@
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
-    <ul>
+    <ul class="errors">
       <% @user.errors.full_messages.each do |m| %>
       <li><%= m %></li>
       <% end %>
@@ -26,7 +26,7 @@
      <%= f.label :password %>
      <%= f.password_field :password %>
   </p>
-  
+
   <p class="field">
      <%= f.label :password_confirmation %>
      <%= f.password_field :password_confirmation %>
