@@ -6,7 +6,7 @@ document.getElementById('projects').style.backgroundColor = "white";
 document.getElementById('projects').style.color = "black";
 
 document.getElementById('my-pledges').style.display = "none";
-document.getElementById('pledges').style.backgroundColor = "grey";
+document.getElementById('pledges').style.backgroundColor = "cadetblue";
 
 function toggleState(tab, section) {
   document.getElementById(tab).addEventListener('click', function() {
@@ -14,8 +14,8 @@ function toggleState(tab, section) {
     document.getElementById('my-pledges').style.display = "none";
     document.getElementById('my-projects').style.display = "none";
 
-    document.getElementById('pledges').style.backgroundColor = "grey";
-    document.getElementById('projects').style.backgroundColor = "grey";
+    document.getElementById('pledges').style.backgroundColor = "cadetblue";
+    document.getElementById('projects').style.backgroundColor = "cadetblue";
 
     document.getElementById('pledges').style.color = "white";
     document.getElementById('projects').style.color = "white";

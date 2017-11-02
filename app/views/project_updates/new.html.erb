@@ -1,4 +1,6 @@
-<h1>Create an Update</h1>
-<%= link_to "Back to #{@project.title}", project_path(@project) %>
+<div class="form-page">
+  <h1>Create an Update</h1>
+  <%= link_to "Back to #{@project.title}", project_path(@project) %>
 
-<%= render "form", project: @project, project_update: @update %>
+  <%= render "form", project: @project, project_update: @update %>
+</div>

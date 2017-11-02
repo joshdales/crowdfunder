@@ -37,7 +37,7 @@ class ProjectUpdatesController < ApplicationController
     if @update.update_attributes(update_params)
       redirect_to project_path(params[:project_id])
     else
-      flash[:notice] = "All fields must be entered."
+      flash[:alert] = "All fields must be entered."
       render :edit
     end
   end
@@ -47,7 +47,7 @@ class ProjectUpdatesController < ApplicationController
     @update = @project.project_updates.find(params[:id])
     @update.delete
     redirect_to project_path(params[:project_id])
-    flash[:notice] = "Update has been deleted."
+    flash[:alert] = "Update has been deleted."
   end
 
   private

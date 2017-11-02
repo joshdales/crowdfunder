@@ -1,6 +1,7 @@
 input[type=text],
 input[type=password],
-input[type=email] {
+input[type=email],
+input[type=number] {
   padding: 0.25em 0.5em;
   border: 1px solid #f0f0f0;
 }
@@ -14,4 +15,13 @@ input[type=submit] {
   &:hover {
     background-color: darken(cadetblue, 8%);
   }
+}
+
+input[type="checkbox"] {
+  margin: 0.5rem;
+}
+
+input#search {
+  background-color: #f9f9f9;
+  box-shadow: inset 0 0 1px 0px rgba(0, 0, 0, 0.1);
 }

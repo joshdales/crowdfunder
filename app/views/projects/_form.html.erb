@@ -1,45 +1,43 @@
 <%= form_for(@project, html: {multipart: true}) do |f| %>
   <% if @project.errors.any? %>
-    <ul>
+    <ul class="errors">
       <% @project.errors.full_messages.each do |m| %>
       <li><%= m %></li>
       <% end %>
     </ul>
   <% end %>
 
-  <div>
+  <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :goal %>
     <%= f.number_field :goal %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :image %>
     <%= f.text_field :image %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :end_date %>
     <%= f.datetime_select :end_date %>
   </div>
 
-  <div class="">
-    <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
-  </div>
-
+  <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
+  <br>
   <%= f.submit %>
 <% end %>

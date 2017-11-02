@@ -1,6 +1,6 @@
 <section class="project-header">
   <h1><%= @project.title %></h1>
-  <h4>By <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", project_owner_path(@project.id, @project.user.id) %></h4>
+  <h4>By <%= link_to "#{@project.user.full_name}", project_owner_path(@project, @project.user) %></h4>
 
   <% if @project.image.present? %>
   <%= image_tag @project.image %>
@@ -11,7 +11,7 @@
   <% if @project.tags.present? %>
     <div class="tags">
       <% @project.tags.each do |tag| %>
-        <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
+        <%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %>
       <% end %>
     </div>
   <% end %>
@@ -29,6 +29,7 @@
     <p>Total Raised To Date: <%= number_to_currency(@project.pledges.map { |pledge| pledge.dollar_amount }.sum) %></p>
 
     <% unless current_user == @project.user %>
+      <div class="pledge">
       <% if !current_user || current_user.pledges.where(project_id: @project.id).empty? %>
         <h2>Enter an amount to pledge below!</h2>
       <% else %>
@@ -36,6 +37,7 @@
         <p>You have already contributed to this cause. To pledge again, enter an amount below.</p>
       <% end %>
       <%= render 'pledges/form', pledge: @pledge %>
+    </div>
     <% end %>
   </section>
 </section>

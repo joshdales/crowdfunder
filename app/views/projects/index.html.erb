@@ -1,4 +1,3 @@
-<p><%= link_to "New Project", new_project_path %></p>
 <section class="hero-image">
   <h1><%= Project.all.count %>
     <% if Project.all.count == 1 %>
@@ -23,7 +22,7 @@
     <article class="project">
       <%= link_to project, class: 'project-link' do %>
       <figure class="project-image">
-        <% if project.image %>
+        <% if project.image.present? %>
         <%= image_tag project.image %>
         <% else %>
         <%= image_tag ActionController::Base.helpers.asset_path("default.jpg") %>
