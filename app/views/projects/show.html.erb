@@ -11,7 +11,7 @@
   <% if @project.tags.present? %>
     <div class="tags">
       <% @project.tags.each do |tag| %>
-        <p><%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %></p>
+        <%= link_to tag.name, search_path(search: "#{tag.name}", commit: "Search") %>
       <% end %>
     </div>
   <% end %>

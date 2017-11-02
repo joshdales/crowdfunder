@@ -7,35 +7,35 @@
     </ul>
   <% end %>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
-  </p>
+  </div>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :description %>
     <%= f.text_field :description %>
-  </p>
+  </div>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :goal %>
     <%= f.number_field :goal %>
-  </p>
+  </div>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :image %>
     <%= f.text_field :image %>
-  </p>
+  </div>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :start_date %>
     <%= f.datetime_select :start_date %>
-  </p>
+  </div>
 
-  <p class="field">
+  <div class="field">
     <%= f.label :end_date %>
     <%= f.datetime_select :end_date %>
-  </p>
+  </div>
 
   <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) %>
   <br>
